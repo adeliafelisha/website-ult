@@ -1,6 +1,6 @@
 # Website ULT Universitas Padjadjaran
 
-Portal informasi dan pengarah layanan Unit Layanan Terpadu (ULT) Unpad. Aplikasi ini mengikuti Product Blueprint v2.0: membantu pengguna menemukan layanan, memahami syarat/prosedur, lalu menuju kanal resmi. Aplikasi **bukan** sistem ticketing atau CRM.
+Portal informasi dan pengarah layanan Unit Layanan Terpadu (ULT) Unpad. Aplikasi ini mengikuti Product Blueprint v2.0
 
 ## Fitur
 
