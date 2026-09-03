@@ -23,6 +23,7 @@ class ExampleTest extends TestCase
     {
         $this->seed();
 
+        $this->get('/language/id');
         $this->get('/layanan')->assertOk()->assertSee('Temukan layanan');
         $this->get('/artikel')->assertOk()->assertSee('Artikel');
         $this->get('/faq')->assertOk()->assertSee('Pertanyaan');
@@ -45,5 +46,22 @@ class ExampleTest extends TestCase
         $this->seed();
 
         $this->get('/kontak')->assertOk()->assertSee('WhatsApp Admin ULT')->assertSee('Helpdesk Unpad')->assertSee('Instagram ULT Unpad')->assertSee('TikTok ULT Unpad');
+    }
+
+    public function test_new_discovery_interfaces_and_profile_scores_are_available(): void
+    {
+        $this->seed();
+        $this->get('/language/id');
+
+        $this->get('/')->assertOk()->assertSee('data-article-carousel', false);
+        $this->get('/profil')->assertOk()
+            ->assertSee('Skor pelayanan per triwulan')
+            ->assertSee('data-satisfaction-source', false)
+            ->assertDontSee('22.08', false);
+        $this->get('/layanan?q=KTM')->assertOk()
+            ->assertSee('Penggantian KTM')
+            ->assertSee('layanan ditemukan');
+        $this->get('/faq?category=Akademik')->assertOk()
+            ->assertSee('Jelajahi berdasarkan topik');
     }
 }

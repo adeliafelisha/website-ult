@@ -2,6 +2,10 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Widgets\ContentOverview;
+use App\Filament\Widgets\MonthlyTrafficChart;
+use App\Filament\Widgets\TrafficInsights;
+use App\Filament\Widgets\TrafficOverview;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -27,6 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->darkMode(true)
             ->brandName('ULT Unpad CMS')
             ->brandLogo(asset('images/logo-ult.png'))
             ->favicon(asset('images/logo-ult.png'))
@@ -34,12 +39,14 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Purple,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
+                TrafficOverview::class,
+                MonthlyTrafficChart::class,
+                ContentOverview::class,
+                TrafficInsights::class,
                 Widgets\AccountWidget::class,
             ])
             ->middleware([

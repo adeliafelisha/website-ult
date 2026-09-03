@@ -2,6 +2,8 @@
 
 return [
 
+    'admin_domains' => env('ADMIN_ALLOWED_DOMAINS', 'ult.unpad.ac.id,unpad.ac.id'),
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults

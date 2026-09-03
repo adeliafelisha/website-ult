@@ -23,14 +23,14 @@ class ServiceCategoryResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Kategori Layanan';
 
-    public static function form(Form $form): Form
+    public static function form(Form $f): Form
     {
-        return $form->schema([Forms\Components\TextInput::make('name')->label('Nama')->required()->live(onBlur: true)->afterStateUpdated(fn ($state, $set) => $set('slug', Str::slug($state))), Forms\Components\TextInput::make('slug')->required()->unique(ignoreRecord: true), Forms\Components\Textarea::make('description')->columnSpanFull(), Forms\Components\TextInput::make('icon')->default('sparkles'), Forms\Components\TextInput::make('sort_order')->numeric()->default(0), Forms\Components\Toggle::make('is_featured')->label('Tampilkan di beranda')]);
+        return $f->schema([Forms\Components\TextInput::make('name')->label('Nama Indonesia')->required()->live(onBlur: true)->afterStateUpdated(fn ($state, $set) => $set('slug', Str::slug($state))), Forms\Components\TextInput::make('name_en')->label('Name (English)'), Forms\Components\TextInput::make('slug')->required()->unique(ignoreRecord: true), Forms\Components\Textarea::make('description')->label('Deskripsi Indonesia'), Forms\Components\Textarea::make('description_en')->label('Description (English)'), Forms\Components\TextInput::make('sort_order')->numeric()->default(0), Forms\Components\Toggle::make('is_featured')->label('Tampilkan di beranda')])->columns(2);
     }
 
-    public static function table(Table $table): Table
+    public static function table(Table $t): Table
     {
-        return $table->columns([Tables\Columns\TextColumn::make('name')->searchable()->sortable(), Tables\Columns\TextColumn::make('services_count')->counts('services')->label('Layanan'), Tables\Columns\IconColumn::make('is_featured')->boolean()])->defaultSort('sort_order')->actions([Tables\Actions\EditAction::make()])->bulkActions([Tables\Actions\DeleteBulkAction::make()]);
+        return $t->columns([Tables\Columns\TextColumn::make('name')->searchable(), Tables\Columns\TextColumn::make('services_count')->counts('services')->label('Layanan'), Tables\Columns\IconColumn::make('is_featured')->boolean()])->defaultSort('sort_order')->actions([Tables\Actions\EditAction::make(), Tables\Actions\DeleteAction::make()->disabled(fn ($record) => $record->services()->exists())])->bulkActions([]);
     }
 
     public static function getPages(): array

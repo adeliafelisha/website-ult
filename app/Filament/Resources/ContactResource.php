@@ -24,12 +24,12 @@ class ContactResource extends Resource
 
     public static function form(Form $f): Form
     {
-        return $f->schema([Forms\Components\TextInput::make('label')->label('Label')->required(), Forms\Components\Select::make('type')->label('Jenis')->options(['email' => 'Email', 'phone' => 'Telepon', 'whatsapp' => 'WhatsApp', 'helpdesk' => 'Helpdesk', 'instagram' => 'Instagram', 'tiktok' => 'TikTok', 'address' => 'Alamat', 'other' => 'Lainnya'])->required(), Forms\Components\TextInput::make('value')->label('Nilai')->required(), Forms\Components\TextInput::make('url')->label('URL/tautan')->helperText('Gunakan URL lengkap, termasuk https://'), Forms\Components\Textarea::make('description')->columnSpanFull(), Forms\Components\TextInput::make('sort_order')->numeric()->default(0), Forms\Components\Toggle::make('is_published')->label('Aktif')->default(true)])->columns(2);
+        return $f->schema([Forms\Components\TextInput::make('label')->label('Label Indonesia')->required(), Forms\Components\TextInput::make('label_en')->label('Label English'), Forms\Components\Select::make('type')->options(['email' => 'Email', 'phone' => 'Telepon', 'whatsapp' => 'WhatsApp', 'helpdesk' => 'Helpdesk', 'instagram' => 'Instagram', 'tiktok' => 'TikTok', 'address' => 'Alamat', 'other' => 'Lainnya'])->required(), Forms\Components\TextInput::make('value')->label('Nilai Indonesia')->required(), Forms\Components\TextInput::make('value_en')->label('Value English'), Forms\Components\TextInput::make('url')->url(), Forms\Components\Textarea::make('description')->label('Deskripsi Indonesia'), Forms\Components\Textarea::make('description_en')->label('Description English'), Forms\Components\TextInput::make('sort_order')->numeric()->default(0), Forms\Components\Toggle::make('is_published')->label('Aktif')->default(true)])->columns(2);
     }
 
     public static function table(Table $t): Table
     {
-        return $t->columns([Tables\Columns\TextColumn::make('label')->searchable(), Tables\Columns\TextColumn::make('type')->badge(), Tables\Columns\TextColumn::make('value'), Tables\Columns\IconColumn::make('is_published')->boolean()])->defaultSort('sort_order')->actions([Tables\Actions\EditAction::make()])->bulkActions([Tables\Actions\DeleteBulkAction::make()]);
+        return $t->columns([Tables\Columns\TextColumn::make('label')->searchable(), Tables\Columns\TextColumn::make('type')->badge(), Tables\Columns\TextColumn::make('value'), Tables\Columns\IconColumn::make('is_published')->boolean()])->defaultSort('sort_order')->actions([Tables\Actions\EditAction::make(), Tables\Actions\DeleteAction::make()])->bulkActions([Tables\Actions\DeleteBulkAction::make()]);
     }
 
     public static function getPages(): array

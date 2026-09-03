@@ -24,12 +24,12 @@ class QuickLinkResource extends Resource
 
     public static function form(Form $f): Form
     {
-        return $f->schema([Forms\Components\TextInput::make('name')->label('Nama')->required(), Forms\Components\TextInput::make('url')->label('URL')->url()->required(), Forms\Components\Textarea::make('description')->columnSpanFull(), Forms\Components\TextInput::make('sort_order')->numeric()->default(0), Forms\Components\Toggle::make('is_published')->label('Aktif')->default(true)])->columns(2);
+        return $f->schema([Forms\Components\TextInput::make('name')->label('Nama Indonesia')->required(), Forms\Components\TextInput::make('name_en')->label('Name (English)'), Forms\Components\TextInput::make('url')->url()->required(), Forms\Components\Textarea::make('description')->label('Deskripsi Indonesia'), Forms\Components\Textarea::make('description_en')->label('Description (English)'), Forms\Components\TextInput::make('sort_order')->numeric()->default(0), Forms\Components\Toggle::make('is_published')->label('Aktif')->default(true)])->columns(2);
     }
 
     public static function table(Table $t): Table
     {
-        return $t->columns([Tables\Columns\TextColumn::make('name')->searchable(), Tables\Columns\TextColumn::make('url')->limit(40), Tables\Columns\IconColumn::make('is_published')->boolean()])->defaultSort('sort_order')->actions([Tables\Actions\EditAction::make()])->bulkActions([Tables\Actions\DeleteBulkAction::make()]);
+        return $t->columns([Tables\Columns\TextColumn::make('name')->searchable(), Tables\Columns\TextColumn::make('url')->limit(40), Tables\Columns\IconColumn::make('is_published')->boolean()])->defaultSort('sort_order')->actions([Tables\Actions\EditAction::make(), Tables\Actions\DeleteAction::make()])->bulkActions([Tables\Actions\DeleteBulkAction::make()]);
     }
 
     public static function getPages(): array

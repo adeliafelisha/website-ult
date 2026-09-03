@@ -10,11 +10,12 @@ Portal informasi dan pengarah layanan Unit Layanan Terpadu (ULT) Unpad. Aplikasi
 - CMS Filament di `/admin` untuk kategori, layanan, artikel, FAQ, kontak, serta tautan.
 - Workflow draft/publish, waktu terbit, content owner, metadata SEO, keyword, dan gambar.
 - Aksesibilitas dasar: semantic HTML, skip link, keyboard focus, high contrast, ukuran teks, reduced motion, dan layout responsif.
-- Analytics internal yang hanya menyimpan query pencarian, jumlah hasil, klik keluar, dan hash IP.
+- Dashboard admin dengan trafik bulanan, pengunjung unik, halaman populer, perangkat, sumber kunjungan, pencarian, klik keluar, dan status konten.
+- Analytics internal yang tidak menyimpan IP mentah; identitas teknis disimpan sebagai hash dan trafik bot/admin tidak dihitung.
 
 ## Stack
 
-- PHP 8.1+, Laravel 10, Filament 3.2, Livewire 3
+- PHP 8.1+, Laravel 10, Filament 3.3, Livewire 3
 - MySQL/MariaDB (produksi) atau SQLite (lokal/tes)
 - Vite, vanilla JavaScript, CSS custom, Poppins
 
@@ -57,9 +58,14 @@ Untuk SQLite, buat file `database/database.sqlite`, lalu gunakan `DB_CONNECTION=
 - `services` → ringkasan, sasaran, syarat, dokumen, prosedur, tipe layanan, CTA, lokasi, jadwal, estimasi, biaya, unit, owner, SEO, dan publikasi.
 - `articles` → artikel terstruktur yang dikelola admin.
 - `faqs`, `quick_links`, `contacts` → self-service dan external routing.
+- `page_views` → trafik halaman publik dengan visitor/IP hash, tipe perangkat, locale, dan referrer eksternal.
 - `search_events`, `outbound_clicks` → metrik discovery yang minim data pribadi.
 
 ## Operasional konten
+
+Panduan lengkap operator CMS tersedia di [docs/admin-guide.docx](docs/admin-guide.docx).
+
+Kajian perbandingan website lama WordPress dengan aplikasi Laravel + Filament, termasuk frontend, CRUD, POV pengguna/admin, backend, database, security, gap, dan roadmap, tersedia di [docs/perbandingan-wordpress-vs-laravel-filament-ult.docx](docs/perbandingan-wordpress-vs-laravel-filament-ult.docx).
 
 1. Admin membuat konten sebagai draft dan melengkapi pemilik konten.
 2. Reviewer memverifikasi syarat, prosedur, kontak, jam, serta URL eksternal.

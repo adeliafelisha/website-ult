@@ -28,5 +28,5 @@ Route::get('/artikel', [SiteController::class, 'articles'])->name('articles.inde
 Route::get('/artikel/{article:slug}', [SiteController::class, 'article'])->name('articles.show');
 Route::get('/faq', [SiteController::class, 'faqs'])->name('faqs');
 Route::get('/kontak', [SiteController::class, 'contact'])->name('contact');
-Route::get('/pencarian', [SiteController::class, 'search'])->name('search');
+Route::get('/pencarian', [SiteController::class, 'search'])->middleware('throttle:30,1')->name('search');
 Route::post('/analytics/outbound', [SiteController::class, 'track'])->middleware('throttle:60,1')->name('analytics.outbound');

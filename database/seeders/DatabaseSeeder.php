@@ -15,7 +15,14 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::updateOrCreate(['email' => env('ADMIN_EMAIL', 'admin@ult.unpad.ac.id')], ['name' => 'Admin ULT', 'password' => Hash::make(env('ADMIN_PASSWORD', 'admin12345')), 'is_admin' => true]);
+        $adminEmail = env('ADMIN_EMAIL');
+        $adminPassword = env('ADMIN_PASSWORD');
+        if (app()->environment('production') && (! $adminEmail || ! $adminPassword || strlen($adminPassword) < 14)) {
+            throw new \RuntimeException('ADMIN_EMAIL dan ADMIN_PASSWORD minimal 14 karakter wajib disetel untuk seeding production.');
+        }
+        if ($adminEmail && $adminPassword) {
+            User::updateOrCreate(['email' => $adminEmail], ['name' => 'Admin ULT', 'password' => Hash::make($adminPassword), 'email_verified_at' => now(), 'is_admin' => true]);
+        }
         $cats = [['Akademik Mahasiswa', 'akademik-mahasiswa', 'Registrasi, UKT, KRS, dan dokumen mahasiswa.'], ['Mahasiswa Baru & SMUP', 'mahasiswa-baru-smup', 'Penerimaan, verifikasi, NPM, dan KTM.'], ['Dosen & Tendik', 'dosen-tendik', 'Layanan dosen dan tenaga kependidikan.'], ['Layanan Internasional', 'layanan-internasional', 'Exchange, visa, KITAS, dan study permit.'], ['PAuS & Teknologi Informasi', 'paus-ti', 'Akun PAuS, SIAT, PINTAS, dan LiVE.'], ['Layanan Disabilitas', 'layanan-disabilitas', 'Akses fasilitas dan pendampingan inklusif.']];
         foreach ($cats as $i => $c) {
             ServiceCategory::updateOrCreate(['slug' => $c[1]], ['name' => $c[0], 'description' => $c[2], 'sort_order' => $i, 'is_featured' => true]);

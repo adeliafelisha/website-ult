@@ -129,7 +129,7 @@ syncScrollTopButton();
 
 const profileLinks = qsa('.profile-subnav a');
 if (profileLinks.length) {
-    const sections = profileLinks.map((link) => qs(link.getAttribute('href'))).filter(Boolean);
+    const sections = [...profileLinks].map((link) => qs(link.getAttribute('href'))).filter(Boolean);
     const updateProfileNavigation = () => {
         const active = [...sections].reverse().find((section) => section.getBoundingClientRect().top <= 170) || sections[0];
         profileLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${active?.id}`));
@@ -145,3 +145,74 @@ qsa('.external-link[data-track]').forEach((link) => link.addEventListener('click
         body: JSON.stringify({ label: link.dataset.track, url: link.href, source: location.pathname }),
     }).catch(() => {});
 }));
+
+const articleCarousel = qs('[data-article-carousel]');
+if (articleCarousel) {
+    const track = articleCarousel.querySelector('.article-carousel-track');
+    const slides = [...articleCarousel.querySelectorAll('.article-slide')];
+    const previous = qs('.article-prev');
+    const next = qs('.article-next');
+    const current = qs('[data-carousel-current]');
+
+    const activeSlide = () => {
+        if (!slides.length) return 0;
+        return slides.reduce((closest, slide, index) => (
+            Math.abs((slide.offsetLeft - track.offsetLeft) - track.scrollLeft) < Math.abs((slides[closest].offsetLeft - track.offsetLeft) - track.scrollLeft) ? index : closest
+        ), 0);
+    };
+    const updateCarousel = () => {
+        const index = activeSlide();
+        if (current) current.textContent = String(index + 1);
+        if (previous) previous.disabled = index === 0;
+        if (next) next.disabled = index === slides.length - 1;
+    };
+    const go = (direction) => {
+        const target = Math.max(0, Math.min(slides.length - 1, activeSlide() + direction));
+        const slide = slides[target];
+        if (slide) track.scrollTo({ left: slide.offsetLeft - track.offsetLeft, behavior: accessibility.motion ? 'auto' : 'smooth' });
+    };
+    previous?.addEventListener('click', () => go(-1));
+    next?.addEventListener('click', () => go(1));
+    track?.addEventListener('scroll', updateCarousel, { passive: true });
+    window.addEventListener('resize', updateCarousel);
+    updateCarousel();
+}
+
+qs('[data-satisfaction-source]')?.addEventListener('click', (event) => {
+    const note = qs('[data-satisfaction-note]');
+    if (!note) return;
+    note.hidden = !note.hidden;
+    event.currentTarget.setAttribute('aria-expanded', String(!note.hidden));
+});
+
+const revealSelectors = [
+    'main .section-head', 'main .page-hero .container', 'main .profile-hero-grid > *',
+    'main .category-card', 'main .service-card', 'main .article-card',
+    'main .split > *', 'main .timeline article', 'main .purpose-grid article',
+    'main .pasti-grid article', 'main .satisfaction-grid article',
+    'main .legal-grid > *', 'main .team-grid > *', 'main .profile-gallery figure',
+    'main .contact-card', 'main .finder-panel', 'main .results-summary',
+    'main .faq-layout > *', 'main .quick-links .link-grid a', 'main .detail-grid > *',
+    'main .detail-content > *', 'main .article-detail > *',
+];
+
+const revealElements = [...new Set(revealSelectors.flatMap((selector) => [...qsa(selector)]))];
+revealElements.forEach((element, index) => {
+    element.classList.add('scroll-reveal');
+    element.style.setProperty('--reveal-delay', `${Math.min(index % 4, 3) * 70}ms`);
+    if (element.matches('.split > :first-child, .legal-grid > :first-child, .team-grid > :first-child')) element.classList.add('reveal-from-left');
+    if (element.matches('.split > :last-child, .legal-grid > :last-child, .team-grid > :last-child')) element.classList.add('reveal-from-right');
+});
+
+if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -45px' });
+    revealElements.forEach((element) => revealObserver.observe(element));
+} else {
+    revealElements.forEach((element) => element.classList.add('is-revealed'));
+}

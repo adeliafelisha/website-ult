@@ -23,14 +23,32 @@ class SiteController extends Controller
 
     public function services(Request $r): View
     {
+        $r->validate([
+            'q' => ['nullable', 'string', 'max:100'],
+            'category' => ['nullable', 'string', 'max:100'],
+            'audience' => ['nullable', 'string', 'max:100'],
+            'delivery' => ['nullable', 'in:online,offline,hybrid'],
+        ]);
         $q = Service::published()->with('category');
+        if ($r->filled('q')) {
+            $like = '%'.trim((string) $r->q).'%';
+            $q->where(fn ($x) => $x
+                ->where('title', 'like', $like)->orWhere('title_en', 'like', $like)
+                ->orWhere('summary', 'like', $like)->orWhere('summary_en', 'like', $like)
+                ->orWhere('keywords', 'like', $like));
+        }
         if ($r->filled('category')) {
             $q->whereHas('category', fn ($x) => $x->where('slug', $r->category));
         } if ($r->filled('audience')) {
-            $q->where('audience', 'like', '%'.$r->audience.'%');
+            $q->where(fn ($x) => $x->where('audience', 'like', '%'.$r->audience.'%')->orWhere('audience_en', 'like', '%'.$r->audience.'%'));
+        } if ($r->filled('delivery')) {
+            $q->where('delivery_type', $r->delivery);
         }
 
-        return view('services.index', ['services' => $q->latest()->paginate(9)->withQueryString(), 'categories' => ServiceCategory::orderBy('sort_order')->get()]);
+        return view('services.index', [
+            'services' => $q->latest()->paginate(9)->withQueryString(),
+            'categories' => ServiceCategory::orderBy('sort_order')->get(),
+        ]);
     }
 
     public function service(Service $service): View
@@ -54,12 +72,23 @@ class SiteController extends Controller
 
     public function faqs(Request $r): View
     {
+        $r->validate(['q' => ['nullable', 'string', 'max:100'], 'category' => ['nullable', 'string', 'max:100']]);
         $q = Faq::published();
         if ($r->filled('q')) {
-            $q->where(fn ($x) => $x->where('question', 'like', '%'.$r->q.'%')->orWhere('answer', 'like', '%'.$r->q.'%'));
+            $like = '%'.trim((string) $r->q).'%';
+            $q->where(fn ($x) => $x
+                ->where('question', 'like', $like)->orWhere('question_en', 'like', $like)
+                ->orWhere('answer', 'like', $like)->orWhere('answer_en', 'like', $like));
+        }
+        if ($r->filled('category')) {
+            $q->where(fn ($x) => $x->where('category', $r->category)->orWhere('category_en', $r->category));
         }
 
-        return view('faqs', ['faqs' => $q->orderBy('sort_order')->paginate(15)->withQueryString()]);
+        return view('faqs', [
+            'faqs' => $q->orderBy('sort_order')->paginate(15)->withQueryString(),
+            'faqCategories' => Faq::published()->get(['category', 'category_en'])
+                ->map(fn (Faq $faq) => $faq->category)->filter()->unique()->sort()->values(),
+        ]);
     }
 
     public function contact(): View
@@ -69,6 +98,7 @@ class SiteController extends Controller
 
     public function search(Request $r): View
     {
+        $r->validate(['q' => ['nullable', 'string', 'max:100']]);
         $term = trim((string) $r->q);
         $services = collect();
         $articles = collect();
@@ -78,7 +108,7 @@ class SiteController extends Controller
             $services = Service::published()->where(fn ($q) => $q->where('title', 'like', $like)->orWhere('summary', 'like', $like)->orWhere('keywords', 'like', $like))->take(20)->get();
             $articles = Article::published()->where(fn ($q) => $q->where('title', 'like', $like)->orWhere('excerpt', 'like', $like)->orWhere('keywords', 'like', $like))->take(20)->get();
             $faqs = Faq::published()->where(fn ($q) => $q->where('question', 'like', $like)->orWhere('answer', 'like', $like))->take(20)->get();
-            SearchEvent::create(['query' => $term, 'result_count' => $services->count() + $articles->count() + $faqs->count(), 'ip_hash' => hash('sha256', (string) $r->ip())]);
+            SearchEvent::create(['query' => $term, 'result_count' => $services->count() + $articles->count() + $faqs->count(), 'ip_hash' => $this->hashIp($r)]);
         }
 
         return view('search', compact('term', 'services', 'articles', 'faqs'));
@@ -87,8 +117,13 @@ class SiteController extends Controller
     public function track(Request $r): JsonResponse
     {
         $data = $r->validate(['label' => 'required|string|max:255', 'url' => 'required|url|max:2048', 'source' => 'nullable|string|max:255']);
-        OutboundClick::create($data + ['ip_hash' => hash('sha256', (string) $r->ip())]);
+        OutboundClick::create($data + ['ip_hash' => $this->hashIp($r)]);
 
         return response()->json(['ok' => true]);
+    }
+
+    private function hashIp(Request $request): string
+    {
+        return hash_hmac('sha256', (string) $request->ip(), (string) config('app.key'));
     }
 }
