@@ -12,9 +12,9 @@ SQLite dan folder `storage/app/public` lokal jangan digunakan di Vercel karena i
 
 ## 2. Pengaturan project Vercel
 
-Import repository Git ke Vercel. Pastikan **Root Directory** menunjuk ke folder yang berisi `artisan`, `composer.json`, dan `vercel.json`. Framework Preset boleh dibiarkan `Other`; `vercel.json` sudah mengatur instalasi aset Node, build, output `public`, runtime PHP, dan routing. Dependency Composer dipasang oleh builder `vercel-php`, bukan oleh Install Command Vercel.
+Import repository Git ke Vercel. Pastikan **Root Directory** menunjuk ke folder yang berisi `artisan`, `composer.json`, dan `vercel.json`. Framework Preset boleh dibiarkan `Other`; `vercel.json` sudah mengatur instalasi aset Node, build, output statis `.vercel-static`, runtime PHP, dan routing. Folder output hanya memuat CSS, JavaScript, gambar, favicon, dan robots.txt; `public/index.php` tidak disajikan sebagai file statis. Dependency Composer dipasang oleh builder `vercel-php`, bukan oleh Install Command Vercel.
 
-Hapus override dashboard lama yang mengisi Output Directory dengan `dist`. Jika Vercel menampilkan nilai dari repository, gunakan `public`.
+Hapus override dashboard lama yang mengisi Output Directory dengan `dist` atau `public`. Jika Vercel menampilkan nilai dari repository, gunakan `.vercel-static`.
 
 ## 3. Environment Variables
 
