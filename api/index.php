@@ -8,6 +8,38 @@ define('LARAVEL_START', microtime(true));
 $basePath = dirname(__DIR__);
 $storagePath = sys_get_temp_dir().'/ult-unpad-storage';
 
+$runtimeEnvironment = [
+    'APP_CONFIG_CACHE' => sys_get_temp_dir().'/ult-config.php',
+    'APP_EVENTS_CACHE' => sys_get_temp_dir().'/ult-events.php',
+    'APP_PACKAGES_CACHE' => sys_get_temp_dir().'/ult-packages.php',
+    'APP_ROUTES_CACHE' => sys_get_temp_dir().'/ult-routes.php',
+    'APP_SERVICES_CACHE' => sys_get_temp_dir().'/ult-services.php',
+    'VIEW_COMPILED_PATH' => $storagePath.'/framework/views',
+];
+
+if (getenv('VERCEL')) {
+    foreach ($runtimeEnvironment as $key => $value) {
+        if (! getenv($key)) {
+            putenv("{$key}={$value}");
+            $_ENV[$key] = $value;
+            $_SERVER[$key] = $value;
+        }
+    }
+}
+
+register_shutdown_function(static function (): void {
+    $error = error_get_last();
+
+    if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR], true)) {
+        error_log(sprintf(
+            '[ULT_FATAL] %s in %s:%d',
+            $error['message'],
+            $error['file'],
+            $error['line'],
+        ));
+    }
+});
+
 foreach ([
     $storagePath.'/app/public',
     $storagePath.'/framework/cache/data',
