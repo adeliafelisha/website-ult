@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [SiteController::class, 'home'])->name('home');
-Route::view('/profil', 'profile')->name('profile');
+Route::get('/profil', [SiteController::class, 'profile'])->name('profile');
 Route::get('/language/{locale}', function (string $locale) {
     abort_unless(in_array($locale, ['id', 'en'], true), 404);
     session(['locale' => $locale]);
@@ -23,6 +23,7 @@ Route::get('/language/{locale}', function (string $locale) {
     return back();
 })->name('language.switch');
 Route::get('/layanan', [SiteController::class, 'services'])->name('services.index');
+Route::get('/layanan/kategori/{category:slug}', [SiteController::class, 'serviceCategory'])->name('services.category');
 Route::get('/layanan/{service:slug}', [SiteController::class, 'service'])->name('services.show');
 Route::get('/artikel', [SiteController::class, 'articles'])->name('articles.index');
 Route::get('/artikel/{article:slug}', [SiteController::class, 'article'])->name('articles.show');

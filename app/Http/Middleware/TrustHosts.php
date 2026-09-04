@@ -13,8 +13,14 @@ class TrustHosts extends Middleware
      */
     public function hosts(): array
     {
-        return [
+        $hosts = [
             $this->allSubdomainsOfApplicationUrl(),
         ];
+
+        if (env('VERCEL')) {
+            $hosts[] = '^(.+\.)?vercel\.app$';
+        }
+
+        return array_values(array_filter($hosts));
     }
 }

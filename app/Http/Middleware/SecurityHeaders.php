@@ -23,7 +23,14 @@ class SecurityHeaders
         }
 
         if (! $request->is('admin*', 'livewire*')) {
-            $response->headers->set('Content-Security-Policy', "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self'");
+            $imageSources = "'self' data:";
+            $storageUrl = config('filesystems.disks.s3.url');
+
+            if (is_string($storageUrl) && filter_var($storageUrl, FILTER_VALIDATE_URL)) {
+                $imageSources .= ' '.parse_url($storageUrl, PHP_URL_SCHEME).'://'.parse_url($storageUrl, PHP_URL_HOST);
+            }
+
+            $response->headers->set('Content-Security-Policy', "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src {$imageSources}; connect-src 'self'");
         }
 
         return $response;

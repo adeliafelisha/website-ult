@@ -16,7 +16,7 @@ class Service extends Model
 
     protected $guarded = [];
 
-    protected $casts = ['is_featured' => 'boolean', 'is_published' => 'boolean', 'published_at' => 'datetime', 'keywords' => 'array'];
+    protected $casts = ['is_featured' => 'boolean', 'is_published' => 'boolean', 'published_at' => 'datetime', 'keywords' => 'array', 'contact_buttons' => 'array'];
 
     public function setProcedureAttribute(?string $value): void
     {

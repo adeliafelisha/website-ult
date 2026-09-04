@@ -4,9 +4,11 @@ namespace App\Filament\Widgets;
 
 use App\Filament\Resources\ArticleResource;
 use App\Filament\Resources\FaqResource;
+use App\Filament\Resources\SatisfactionSurveyResource;
 use App\Filament\Resources\ServiceResource;
 use App\Models\Article;
 use App\Models\Faq;
+use App\Models\SatisfactionSurvey;
 use App\Models\Service;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -34,6 +36,10 @@ class ContentOverview extends BaseWidget
                 ->description('Klik untuk mengelola FAQ')
                 ->url(FaqResource::getUrl('index'))
                 ->color('info'),
+            Stat::make('Data survei terbit', SatisfactionSurvey::where('is_published', true)->count().' / '.SatisfactionSurvey::count())
+                ->description('Klik untuk mengelola skor dan tautan survei')
+                ->url(SatisfactionSurveyResource::getUrl('index'))
+                ->color('warning'),
         ];
     }
 }

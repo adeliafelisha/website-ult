@@ -42,6 +42,8 @@ function applyAccessibility() {
     if (accessibility.saturation) root.classList.add(`a11y-saturation-${accessibility.saturation}`);
 
     Object.entries(bodyClassMap).forEach(([setting, className]) => document.body.classList.toggle(className, Boolean(accessibility[setting])));
+    qs('meta[name="theme-color"]')?.setAttribute('content', accessibility.dark ? '#171217' : '#92278f');
+    document.documentElement.style.colorScheme = accessibility.dark ? 'dark' : 'light';
     localStorage.setItem('ult-accessibility', JSON.stringify(accessibility));
 
     qsa('.a11y-option').forEach((button) => {
@@ -68,6 +70,13 @@ function applyAccessibility() {
         const indicator = button.querySelector('.setting-level');
         if (indicator) indicator.textContent = level;
     });
+
+    const status = qs('.a11y-status');
+    if (status) {
+        status.textContent = accessibility.dark
+            ? status.dataset.darkActive
+            : status.dataset.lightActive;
+    }
 }
 
 const panel = qs('.a11y-panel');
@@ -80,6 +89,8 @@ function openAccessibility() {
     toggle?.setAttribute('aria-expanded', 'true');
     if (backdrop) backdrop.hidden = false;
     document.body.classList.add('a11y-panel-open');
+    qs('main')?.setAttribute('inert', '');
+    qs('footer')?.setAttribute('inert', '');
     setTimeout(() => panel?.focus(), 50);
 }
 
@@ -89,6 +100,8 @@ function closeAccessibility() {
     toggle?.setAttribute('aria-expanded', 'false');
     if (backdrop) backdrop.hidden = true;
     document.body.classList.remove('a11y-panel-open');
+    qs('main')?.removeAttribute('inert');
+    qs('footer')?.removeAttribute('inert');
     toggle?.focus();
 }
 
@@ -102,6 +115,19 @@ document.addEventListener('keydown', (event) => {
         panel?.classList.contains('open') ? closeAccessibility() : openAccessibility();
     }
     if (event.key === 'Escape' && panel?.classList.contains('open')) closeAccessibility();
+    if (event.key === 'Tab' && panel?.classList.contains('open')) {
+        const focusable = [...panel.querySelectorAll('button:not([disabled]), a[href], input, select, [tabindex]:not([tabindex="-1"])')];
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+        }
+    }
 });
 
 qsa('[data-a11y]').forEach((button) => button.addEventListener('click', () => {
@@ -112,7 +138,11 @@ qsa('[data-a11y]').forEach((button) => button.addEventListener('click', () => {
     else if (setting === 'line-height') accessibility.lineHeight = (accessibility.lineHeight + 1) % 3;
     else if (setting === 'align') accessibility.align = (accessibility.align + 1) % 3;
     else if (setting === 'saturation') accessibility.saturation = (accessibility.saturation + 1) % 3;
-    else accessibility[setting] = !accessibility[setting];
+    else {
+        accessibility[setting] = !accessibility[setting];
+        if (setting === 'dark' && accessibility.dark) accessibility.contrast = false;
+        if (setting === 'contrast' && accessibility.contrast) accessibility.dark = false;
+    }
     applyAccessibility();
 }));
 
@@ -178,11 +208,10 @@ if (articleCarousel) {
     updateCarousel();
 }
 
-qs('[data-satisfaction-source]')?.addEventListener('click', (event) => {
-    const note = qs('[data-satisfaction-note]');
-    if (!note) return;
-    note.hidden = !note.hidden;
-    event.currentTarget.setAttribute('aria-expanded', String(!note.hidden));
+qs('[data-satisfaction-year]')?.addEventListener('change', (event) => {
+    qsa('[data-satisfaction-panel]').forEach((panelElement) => {
+        panelElement.hidden = panelElement.dataset.satisfactionPanel !== event.currentTarget.value;
+    });
 });
 
 const revealSelectors = [
@@ -192,7 +221,9 @@ const revealSelectors = [
     'main .pasti-grid article', 'main .satisfaction-grid article',
     'main .legal-grid > *', 'main .team-grid > *', 'main .profile-gallery figure',
     'main .contact-card', 'main .finder-panel', 'main .results-summary',
-    'main .faq-layout > *', 'main .quick-links .link-grid a', 'main .detail-grid > *',
+    'main .faq-layout > *', 'main .quick-links .link-grid a', 'main .service-category-card',
+    'main .category-hero .container', 'main .category-directory > *',
+    'main .service-detail-directory > *', 'main .detail-grid > *',
     'main .detail-content > *', 'main .article-detail > *',
 ];
 

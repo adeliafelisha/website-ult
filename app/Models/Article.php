@@ -11,7 +11,7 @@ class Article extends Model
 {
     use HasTranslations;
 
-    protected array $translatable = ['title', 'category', 'excerpt', 'content', 'author', 'content_owner', 'seo_description'];
+    protected array $translatable = ['title', 'category', 'excerpt', 'content', 'author', 'content_owner', 'seo_description', 'external_label'];
 
     protected $guarded = [];
 

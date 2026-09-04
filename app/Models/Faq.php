@@ -11,7 +11,7 @@ class Faq extends Model
 {
     use HasTranslations;
 
-    protected array $translatable = ['question', 'answer', 'category', 'audience'];
+    protected array $translatable = ['question', 'answer', 'category', 'audience', 'external_label'];
 
     protected $guarded = [];
 

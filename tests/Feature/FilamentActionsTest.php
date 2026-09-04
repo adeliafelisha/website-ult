@@ -45,10 +45,15 @@ class FilamentActionsTest extends TestCase
     {
         Livewire::test(ManageServiceCategories::class)->callAction('create', data: ['name' => 'Kategori Tes', 'name_en' => 'Test Category', 'slug' => 'kategori-tes', 'sort_order' => 1]);
         $category = ServiceCategory::where('slug', 'kategori-tes')->firstOrFail();
-        Livewire::test(ManageServices::class)->callAction('create', data: ['service_category_id' => $category->id, 'slug' => 'layanan-tes', 'delivery_type' => 'online', 'title' => 'Layanan Tes', 'title_en' => 'Test Service', 'summary' => 'Ringkasan', 'summary_en' => 'Summary', 'cta_label' => 'Buka', 'is_published' => true]);
+        $buttons = ['whatsapp' => ['label' => 'Hubungi Admin', 'label_en' => 'Contact Admin', 'channel' => 'whatsapp', 'url' => 'https://wa.me/628123456789']];
+        Livewire::test(ManageServices::class)->callAction('create', data: ['service_category_id' => $category->id, 'slug' => 'layanan-tes', 'delivery_type' => 'online', 'title' => 'Layanan Tes', 'title_en' => 'Test Service', 'summary' => 'Ringkasan', 'summary_en' => 'Summary', 'contact_buttons' => $buttons, 'is_published' => true]);
         $service = Service::where('slug', 'layanan-tes')->firstOrFail();
-        Livewire::test(ManageServices::class)->callTableAction('edit', $service, data: ['service_category_id' => $category->id, 'slug' => 'layanan-tes', 'delivery_type' => 'hybrid', 'title' => 'Layanan Diedit', 'summary' => 'Ringkasan', 'cta_label' => 'Buka', 'is_published' => true]);
+        $buttons['helpdesk'] = ['label' => 'Buka Helpdesk', 'label_en' => 'Open Helpdesk', 'channel' => 'helpdesk', 'url' => 'https://helpdesk.unpad.ac.id'];
+        Livewire::test(ManageServices::class)->callTableAction('edit', $service, data: ['service_category_id' => $category->id, 'slug' => 'layanan-tes', 'delivery_type' => 'hybrid', 'title' => 'Layanan Diedit', 'summary' => 'Ringkasan', 'contact_buttons' => $buttons, 'is_published' => true]);
         $this->assertDatabaseHas('services', ['id' => $service->id, 'title' => 'Layanan Diedit', 'delivery_type' => 'hybrid']);
+        $savedLabels = array_column($service->fresh()->contact_buttons, 'label');
+        $this->assertContains('Hubungi Admin', $savedLabels);
+        $this->assertContains('Buka Helpdesk', $savedLabels);
         Livewire::test(ManageServices::class)->callTableAction('delete', $service->fresh());
         Livewire::test(ManageServiceCategories::class)->callTableAction('delete', $category->fresh());
         $this->assertDatabaseMissing('service_categories', ['id' => $category->id]);

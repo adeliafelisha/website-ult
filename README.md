@@ -63,7 +63,9 @@ Untuk SQLite, buat file `database/database.sqlite`, lalu gunakan `DB_CONNECTION=
 
 ## Operasional konten
 
-Panduan lengkap operator CMS tersedia di [docs/admin-guide.docx](docs/admin-guide.docx).
+Panduan lengkap operator CMS tersedia di [docs/admin-guide.docx](docs/admin-guide.docx). Inventori halaman, komponen, sumber data, status konten lokal, dan siklus tinjauan tersedia di [docs/content-inventory.docx](docs/content-inventory.docx).
+
+Template siap isi untuk fitur Impor CSV tersedia untuk [layanan](docs/service-import-template.csv), [artikel](docs/article-import-template.csv), dan [FAQ](docs/faq-import-template.csv).
 
 Kajian perbandingan website lama WordPress dengan aplikasi Laravel + Filament, termasuk frontend, CRUD, POV pengguna/admin, backend, database, security, gap, dan roadmap, tersedia di [docs/perbandingan-wordpress-vs-laravel-filament-ult.docx](docs/perbandingan-wordpress-vs-laravel-filament-ult.docx).
 
@@ -83,5 +85,7 @@ php artisan route:list
 ```
 
 ## Deployment ringkas
+
+Untuk demo menggunakan akun Vercel, ikuti [panduan deployment prototype Vercel](docs/vercel-prototype-deployment.md).
 
 Jalankan `composer install --no-dev --optimize-autoloader`, `npm ci && npm run build`, `php artisan migrate --force`, `php artisan storage:link`, lalu cache konfigurasi/rute/view. Pastikan direktori `storage` dan `bootstrap/cache` writable serta backup database dan uploads aktif.

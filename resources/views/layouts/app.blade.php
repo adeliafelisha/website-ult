@@ -40,7 +40,7 @@
 <div class="search-drawer" aria-hidden="true"><div class="container"><form action="{{ route('search') }}"><label for="global-search">{{ __('ui.search_question') }}</label><div class="search-box"><input id="global-search" name="q" minlength="2" placeholder="{{ __('ui.search_placeholder') }}"><button>{{ __('ui.search') }}</button></div></form></div></div>
 
 <div class="a11y-backdrop" hidden></div>
-<aside class="a11y-panel" aria-hidden="true" aria-labelledby="a11y-title" tabindex="-1">
+<aside class="a11y-panel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="a11y-title" tabindex="-1">
     <div class="a11y-header"><div><span class="a11y-kicker">ULT Unpad</span><h2 id="a11y-title">{{ __('ui.a11y_title') }} <small>(CTRL+U)</small></h2></div><button class="a11y-close" aria-label="{{ __('ui.close') }}"><x-ui-icon name="close" /></button></div>
     <div class="a11y-content">
         <p class="a11y-intro">{{ __('ui.a11y_intro') }}</p>
@@ -58,6 +58,9 @@
             @endforeach
         </div>
         <button class="a11y-reset" data-a11y="reset"><x-ui-icon name="reset" /><span>{{ __('ui.reset') }}</span></button>
+        <p class="a11y-status" role="status" aria-live="polite"
+            data-light-active="{{ app()->getLocale() === 'en' ? 'Day mode active' : 'Mode siang aktif' }}"
+            data-dark-active="{{ app()->getLocale() === 'en' ? 'Night mode active' : 'Mode malam aktif' }}"></p>
     </div>
 </aside>
 

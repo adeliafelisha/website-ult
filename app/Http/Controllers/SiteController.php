@@ -7,6 +7,7 @@ use App\Models\Contact;
 use App\Models\Faq;
 use App\Models\OutboundClick;
 use App\Models\QuickLink;
+use App\Models\SatisfactionSurvey;
 use App\Models\SearchEvent;
 use App\Models\Service;
 use App\Models\ServiceCategory;
@@ -18,17 +19,19 @@ class SiteController extends Controller
 {
     public function home(): View
     {
-        return view('home', ['categories' => ServiceCategory::withCount(['services' => fn ($q) => $q->published()])->orderBy('sort_order')->get(), 'services' => Service::published()->with('category')->where('is_featured', true)->latest()->take(6)->get(), 'articles' => Article::published()->latest('published_at')->take(3)->get(), 'faqs' => Faq::published()->where('is_featured', true)->orderBy('sort_order')->take(6)->get(), 'links' => QuickLink::where('is_published', true)->orderBy('sort_order')->get(), 'contacts' => Contact::where('is_published', true)->orderBy('sort_order')->get()]);
+        return view('home', ['categories' => ServiceCategory::withCount(['services' => fn ($q) => $q->published()])->orderBy('sort_order')->get(), 'articles' => Article::published()->latest('published_at')->take(3)->get(), 'faqs' => Faq::published()->where('is_featured', true)->orderBy('sort_order')->take(6)->get(), 'links' => QuickLink::where('is_published', true)->orderBy('sort_order')->get(), 'contacts' => Contact::where('is_published', true)->orderBy('sort_order')->get()]);
+    }
+
+    public function profile(): View
+    {
+        return view('profile', [
+            'surveys' => SatisfactionSurvey::published()->latest('year')->get(),
+        ]);
     }
 
     public function services(Request $r): View
     {
-        $r->validate([
-            'q' => ['nullable', 'string', 'max:100'],
-            'category' => ['nullable', 'string', 'max:100'],
-            'audience' => ['nullable', 'string', 'max:100'],
-            'delivery' => ['nullable', 'in:online,offline,hybrid'],
-        ]);
+        $r->validate(['q' => ['nullable', 'string', 'max:100']]);
         $q = Service::published()->with('category');
         if ($r->filled('q')) {
             $like = '%'.trim((string) $r->q).'%';
@@ -37,13 +40,6 @@ class SiteController extends Controller
                 ->orWhere('summary', 'like', $like)->orWhere('summary_en', 'like', $like)
                 ->orWhere('keywords', 'like', $like));
         }
-        if ($r->filled('category')) {
-            $q->whereHas('category', fn ($x) => $x->where('slug', $r->category));
-        } if ($r->filled('audience')) {
-            $q->where(fn ($x) => $x->where('audience', 'like', '%'.$r->audience.'%')->orWhere('audience_en', 'like', '%'.$r->audience.'%'));
-        } if ($r->filled('delivery')) {
-            $q->where('delivery_type', $r->delivery);
-        }
 
         return view('services.index', [
             'services' => $q->latest()->paginate(9)->withQueryString(),
@@ -51,11 +47,29 @@ class SiteController extends Controller
         ]);
     }
 
+    public function serviceCategory(ServiceCategory $category): View
+    {
+        return view('services.category', [
+            'category' => $category,
+            'services' => $category->services()->published()->latest()->paginate(12),
+            'categories' => ServiceCategory::with(['services' => fn ($query) => $query->published()->orderBy('title')])
+                ->withCount(['services' => fn ($query) => $query->published()])
+                ->orderBy('sort_order')->get(),
+        ]);
+    }
+
     public function service(Service $service): View
     {
         abort_unless($service->is_published, 404);
 
-        return view('services.show', ['service' => $service->load('category'), 'related' => Service::published()->where('service_category_id', $service->service_category_id)->whereKeyNot($service->id)->take(3)->get()]);
+        return view('services.show', [
+            'service' => $service->load('category'),
+            'defaultContact' => Contact::where('type', 'whatsapp')->where('is_published', true)->orderBy('sort_order')->first(),
+            'related' => Service::published()->where('service_category_id', $service->service_category_id)->whereKeyNot($service->id)->take(3)->get(),
+            'categories' => ServiceCategory::with(['services' => fn ($query) => $query->published()->orderBy('title')])
+                ->withCount(['services' => fn ($query) => $query->published()])
+                ->orderBy('sort_order')->get(),
+        ]);
     }
 
     public function articles(): View
