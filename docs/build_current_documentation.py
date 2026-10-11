@@ -383,6 +383,159 @@ def build_inventory():
     doc.save(DOCS / "content-inventory.docx")
 
 
+def add_qa_section(doc, heading, cases):
+    doc.add_heading(heading, level=1)
+    rows = []
+    for case_id, priority, scenario, expected in cases:
+        rows.append([case_id, priority, scenario, expected, "Belum diuji"])
+    table(doc, ["ID", "Prioritas", "Skenario pengujian", "Hasil yang diharapkan", "Status"], rows,
+          [0.55, 0.7, 2.35, 2.55, 0.85])
+
+
+def build_qa_feature_checklist():
+    doc = Document()
+    configure(doc, "Daftar Fitur dan Checklist QA Website ULT Unpad")
+    intro(doc, "Dokumen kerja untuk memeriksa seluruh fitur website publik, dashboard Filament, integrasi database, aksesibilitas, keamanan, responsivitas, dan deployment sebelum rilis.", "10 September 2026")
+
+    doc.add_heading("Cara menggunakan checklist", level=1)
+    doc.add_paragraph("Jalankan pengujian pada lingkungan yang akan dirilis. Ubah Status menjadi Lulus, Gagal, Tidak berlaku, atau Ditunda. Untuk hasil Gagal, catat URL, perangkat, browser, waktu, langkah reproduksi, hasil aktual, dan tangkapan layar pada tiket defect.")
+    table(doc, ["Prioritas", "Arti", "Keputusan rilis"], [
+        ["P0", "Alur utama, keamanan, atau kehilangan data", "Wajib lulus sebelum rilis"],
+        ["P1", "Fitur penting dan pengalaman mayoritas pengguna", "Harus diperbaiki atau disetujui PIC"],
+        ["P2", "Penyempurnaan, kondisi tepi, dan kualitas visual", "Dapat dijadwalkan dengan catatan"],
+    ], [0.9, 3.25, 2.8])
+    doc.add_paragraph("Cakupan perangkat minimum: desktop 1366 x 768; tablet 768 x 1024; ponsel 390 x 844 dan 360 x 800. Browser minimum: Chrome atau Edge terbaru, Firefox terbaru, dan Safari iOS bila tersedia. Uji Bahasa Indonesia dan English.")
+
+    sections = [
+        ("Akses dan navigasi publik", [
+            ("PUB-01", "P0", "Buka / melalui HTTPS tanpa login.", "Beranda tampil lengkap tanpa error 500, unduhan file, mixed content, atau asset hilang."),
+            ("PUB-02", "P1", "Gunakan semua menu header dan footer.", "Setiap tautan menuju halaman yang benar dan status menu aktif sesuai halaman."),
+            ("PUB-03", "P1", "Buka dan tutup menu navigasi ponsel.", "Menu dapat dioperasikan, tidak terpotong, fokus tetap jelas, dan tertutup setelah memilih halaman."),
+            ("PUB-04", "P1", "Aktifkan pencarian global dari header dan cari minimal dua karakter.", "Drawer terbuka, hasil dikelompokkan menjadi layanan, artikel, dan FAQ."),
+            ("PUB-05", "P1", "Ganti ID ke EN lalu berpindah halaman.", "Bahasa tersimpan dalam sesi dan seluruh label utama memakai English atau fallback yang benar."),
+            ("PUB-06", "P2", "Gunakan breadcrumb dan tombol Scroll to top.", "Breadcrumb tidak terpotong; tombol muncul setelah scroll dan mengembalikan halaman ke atas."),
+            ("PUB-07", "P1", "Buka URL yang tidak tersedia.", "Sistem menampilkan respons 404 yang layak dan tidak membocorkan debug atau stack trace."),
+        ]),
+        ("Beranda", [
+            ("HOME-01", "P0", "Muat beranda pada ID dan EN.", "Hero, pencarian, kelompok layanan, profil inklusif, carousel artikel, FAQ, dan tautan cepat tampil sesuai data terbit."),
+            ("HOME-02", "P1", "Cari layanan dari search bar hero.", "Pengguna diarahkan ke hasil pencarian dengan kata kunci yang sama."),
+            ("HOME-03", "P1", "Pilih setiap kartu kelompok layanan.", "Kartu membuka direktori kategori yang tepat."),
+            ("HOME-04", "P1", "Operasikan carousel artikel melalui tombol, swipe, dan keyboard.", "Artikel berpindah tanpa overflow dan tautan detail dapat dibuka."),
+            ("HOME-05", "P1", "Buka FAQ unggulan dan tautan cepat.", "Accordion terbuka satu per satu dan tautan eksternal membuka tujuan resmi."),
+            ("HOME-06", "P2", "Uji scroll reveal dengan reduced motion aktif dan nonaktif.", "Animasi halus saat aktif dan dinonaktifkan ketika pengguna memilih pengurangan gerak."),
+        ]),
+        ("Profil ULT", [
+            ("PRO-01", "P1", "Buka seluruh bagian Profil dan subnavigasi.", "Profil, sejarah, visi, misi, PASTI, survei, dasar hukum, petugas, dan galeri dapat diakses."),
+            ("PRO-02", "P1", "Periksa timeline pada ponsel dan dengan teks panjang.", "Lingkaran tahun tetap bulat, tahun 2016 tampil tanpa tanggal lengkap, dan teks tidak bertabrakan."),
+            ("PRO-03", "P0", "Pilih setiap tahun Survei Kepuasan.", "Empat skor triwulan yang sesuai tampil; data draft tidak tampil."),
+            ("PRO-04", "P1", "Klik Lihat data asli dan Kuesioner survei kepuasan masyarakat.", "Tombol hanya aktif bila URL tersedia dan membuka URL yang disimpan admin."),
+            ("PRO-05", "P2", "Geser galeri profil pada ponsel.", "Galeri dapat di-swipe tanpa membuat halaman melebar horizontal."),
+        ]),
+        ("Direktori dan detail layanan", [
+            ("SRV-01", "P0", "Buka /layanan dan cari berdasarkan judul, ringkasan, English, atau keyword.", "Hasil relevan tampil tanpa filter lama; query kosong menampilkan kelompok layanan."),
+            ("SRV-02", "P1", "Buka lima kelompok layanan.", "Kategori Mahasiswa, Dosen dan Tendik, TI, Internasional, serta Sarana dan Prasarana memiliki halaman sendiri."),
+            ("SRV-03", "P1", "Periksa daftar layanan di setiap halaman kategori.", "Jumlah, judul, deskripsi, dan tautan detail sesuai database serta hanya menampilkan konten terbit."),
+            ("SRV-04", "P0", "Buka setiap detail layanan.", "Audiens, persyaratan, dokumen, prosedur, lokasi, jam, waktu proses, biaya, dan unit tampil sesuai record."),
+            ("SRV-05", "P1", "Gunakan submenu kategori dan layanan di sisi kiri pada desktop, tablet, dan ponsel.", "Kategori dan sublayanan tetap dapat dipilih, current page jelas, dan tidak menutupi isi."),
+            ("SRV-06", "P0", "Klik semua tombol Hubungi Kami.", "Default WhatsApp dan tombol tambahan memakai label serta URL yang disimpan pada layanan."),
+            ("SRV-07", "P1", "Coba membuka layanan draft melalui URL langsung.", "Sistem memberikan 404 dan tidak mempublikasikan isi draft."),
+            ("SRV-08", "P2", "Uji judul, persyaratan, dan URL yang sangat panjang.", "Konten membungkus dengan baik tanpa overflow atau kartu rusak."),
+        ]),
+        ("Artikel FAQ Kontak dan pencarian", [
+            ("CNT-01", "P1", "Buka daftar dan detail artikel pada ID dan EN.", "Hanya artikel terbit tampil; isi, gambar, penulis, tanggal, dan metadata sesuai record."),
+            ("CNT-02", "P1", "Buka artikel dengan dan tanpa external_url.", "Tombol eksternal hanya muncul bila URL diisi dan label mengikuti bahasa."),
+            ("CNT-03", "P1", "Cari FAQ dengan keyword lalu pilih kategori.", "Hasil pencarian dan kategori tepat, query tetap terlihat, dan reset menghapus filter."),
+            ("CNT-04", "P1", "Operasikan accordion FAQ dengan mouse dan keyboard.", "Pertanyaan dapat dibuka, jawaban terbaca, dan tombol opsional hanya muncul saat tersedia."),
+            ("CNT-05", "P0", "Buka halaman Kontak dan klik setiap kanal aktif.", "WhatsApp, helpdesk, Instagram, TikTok, email, telepon, dan kanal lain menuju tujuan resmi."),
+            ("CNT-06", "P1", "Lakukan pencarian global dengan keyword valid, kosong, satu karakter, dan lebih dari 100 karakter.", "Keyword valid menghasilkan data; input tidak valid ditolak aman tanpa error server."),
+            ("CNT-07", "P2", "Periksa pagination artikel, FAQ, dan layanan.", "Navigasi halaman mempertahankan query/filter dan menghasilkan URL HTTPS."),
+        ]),
+        ("Aksesibilitas tema dan responsivitas", [
+            ("A11Y-01", "P0", "Navigasi seluruh halaman hanya dengan Tab, Shift Tab, Enter, Space, dan Escape.", "Urutan fokus logis, fokus terlihat, semua kontrol dapat dipakai, dan tidak ada keyboard trap."),
+            ("A11Y-02", "P1", "Gunakan skip link pada awal halaman.", "Fokus berpindah langsung ke konten utama."),
+            ("A11Y-03", "P0", "Buka menu aksesibilitas dari tombol dan Ctrl+U, lalu tutup.", "Panel, backdrop, fokus, aria-expanded, dan Escape bekerja tanpa menambah horizontal scroll."),
+            ("A11Y-04", "P1", "Uji perbesar/perkecil teks, kontras tinggi, sorot link, spasi teks, tinggi baris, dan perataan.", "Setiap pengaturan memberi efek nyata, tersimpan, dan tidak menghilangkan konten."),
+            ("A11Y-05", "P1", "Uji dark mode pada semua halaman.", "Teks, kartu, input, sidebar, tombol, dan footer tetap memiliki kontras yang terbaca."),
+            ("A11Y-06", "P1", "Uji pause animation, hide images, dyslexia friendly, large cursor, dan saturation.", "Setiap kontrol berfungsi, status dapat direset, dan preferensi bertahan setelah navigasi."),
+            ("A11Y-07", "P1", "Uji viewport 1366, 1024, 768, 430, 390, dan 360 piksel.", "Tidak ada horizontal scroll, overlap, teks terpotong, atau kontrol di luar layar."),
+            ("A11Y-08", "P1", "Uji zoom browser 200 persen.", "Konten tetap dapat dibaca dan digunakan tanpa kehilangan fungsi."),
+            ("A11Y-09", "P2", "Periksa heading, label form, alt gambar, landmark, dan bahasa dokumen menggunakan screen reader.", "Struktur dapat dipahami dan kontrol memiliki nama yang bermakna."),
+        ]),
+        ("Login dan dashboard admin", [
+            ("ADM-01", "P0", "Buka /admin sebagai tamu.", "Pengguna diarahkan ke login dan tidak dapat melihat data admin."),
+            ("ADM-02", "P0", "Login menggunakan admin valid, password salah, akun nonadmin, email belum terverifikasi, dan domain tidak diizinkan.", "Hanya admin terverifikasi dari domain yang diizinkan dapat masuk."),
+            ("ADM-03", "P0", "Logout lalu gunakan tombol Back.", "Sesi berakhir dan halaman admin tetap membutuhkan login."),
+            ("ADM-04", "P1", "Uji tema Light, Dark, dan System di dashboard.", "Pilihan tersimpan pada browser dan semua komponen terbaca."),
+            ("ADM-05", "P1", "Buka dashboard pada desktop, tablet, dan ponsel.", "Menu, tabel, form, modal, dan action tetap dapat digunakan tanpa overlap."),
+            ("ADM-06", "P1", "Periksa widget ringkasan konten dan trafik.", "Jumlah layanan, artikel, FAQ, survei, page view, visitor anonim, halaman populer, pencarian, dan klik keluar sesuai database."),
+            ("ADM-07", "P1", "Ubah rentang/bulan pada grafik trafik bila tersedia.", "Label bulan dan nilai grafik konsisten serta keadaan tanpa data tetap informatif."),
+        ]),
+        ("CRUD dan publikasi admin", [
+            ("CRUD-01", "P0", "Tambah, lihat, edit, dan hapus Kategori Layanan.", "Perubahan tersimpan; kategori yang masih memiliki layanan tidak dapat dihapus."),
+            ("CRUD-02", "P0", "Tambah, lihat, edit, hapus, publish, dan unpublish Layanan.", "Data dan tombol kontak tersimpan; perubahan publik terlihat pada request berikutnya."),
+            ("CRUD-03", "P0", "Tambah, edit, hapus, publish, unpublish, dan featured Artikel.", "Artikel, carousel, gambar, link opsional, dan waktu terbit mengikuti pengaturan."),
+            ("CRUD-04", "P0", "Tambah, edit, hapus, publish, unpublish, dan featured FAQ.", "FAQ publik dan FAQ beranda mengikuti pengaturan."),
+            ("CRUD-05", "P0", "Tambah, edit, hapus, publish, dan unpublish Survei Kepuasan.", "Tahun unik, empat skor, link data, dan link kuesioner tersimpan serta tampil di Profil."),
+            ("CRUD-06", "P0", "Tambah, edit, dan hapus Kontak.", "Kontak aktif memperbarui halaman Kontak/footer; kontak nonaktif tidak tampil."),
+            ("CRUD-07", "P1", "Tambah, edit, dan hapus Tautan Cepat.", "Tautan aktif tampil di lokasi publik dan URL tervalidasi."),
+            ("CRUD-08", "P0", "Pilih beberapa Layanan, Artikel, FAQ, atau Survei lalu jalankan bulk publish, unpublish, dan delete.", "Aksi hanya memengaruhi record terpilih dan status frontend langsung sesuai."),
+            ("CRUD-09", "P1", "Isi konten Indonesia tanpa English dan sebaliknya.", "Fallback bahasa bekerja sesuai aturan dan tidak menampilkan field kosong yang merusak layout."),
+            ("CRUD-10", "P0", "Masukkan script, event handler, atau HTML berbahaya melalui rich editor.", "Konten disanitasi dan tidak dieksekusi pada halaman publik."),
+        ]),
+        ("Impor CSV", [
+            ("CSV-01", "P0", "Impor service-import-template.csv berformat UTF-8 dengan category_slug valid.", "Baris baru dibuat dan slug yang sama memperbarui record tanpa duplikasi."),
+            ("CSV-02", "P0", "Impor article-import-template.csv dengan konten bilingual, boolean, dan external_url.", "Artikel dibuat/diperbarui; status, featured, SEO, dan tombol link sesuai CSV."),
+            ("CSV-03", "P0", "Impor faq-import-template.csv dengan kategori, sasaran, urutan, dan link opsional.", "FAQ dibuat/diperbarui berdasarkan pertanyaan dan status sesuai CSV."),
+            ("CSV-04", "P1", "Impor CSV dengan koma, kutip ganda, HTML, karakter Indonesia, dan baris kosong.", "Parser membaca kolom secara benar tanpa karakter rusak."),
+            ("CSV-05", "P0", "Impor file dengan header wajib hilang, category_slug tidak ada, URL salah, atau tipe file salah.", "Impor ditolak dengan pesan yang jelas dan tidak meninggalkan data parsial yang menyesatkan."),
+            ("CSV-06", "P1", "Impor layanan tanpa contact_N_url.", "Sistem menambahkan tombol WhatsApp Admin ULT default."),
+            ("CSV-07", "P1", "Impor data sebagai draft, periksa frontend, lalu bulk publish.", "Draft tidak terlihat; setelah publish data muncul tanpa perubahan kode atau redeploy."),
+        ]),
+        ("Analitik keamanan dan operasi", [
+            ("OPS-01", "P1", "Buka beberapa halaman publik dari browser biasa.", "Page view tercatat secara agregat tanpa menyimpan alamat IP mentah."),
+            ("OPS-02", "P1", "Buka halaman admin dan kirim user agent bot.", "Kunjungan admin dan bot tidak dihitung sebagai trafik publik."),
+            ("OPS-03", "P1", "Klik tautan eksternal publik.", "Label, URL, dan sumber tercatat tanpa menghambat navigasi pengguna."),
+            ("OPS-04", "P0", "Periksa header keamanan pada respons HTTPS.", "CSP, HSTS, X Content Type Options, frame protection, referrer, dan permissions policy aktif."),
+            ("OPS-05", "P0", "Uji CSRF pada form/action dan rate limit pencarian serta analytics.", "Request tidak sah atau berlebihan ditolak tanpa mengubah data."),
+            ("OPS-06", "P0", "Periksa production dengan APP_DEBUG false.", "Error tidak menampilkan stack trace, kredensial, connection string, atau path sensitif."),
+            ("OPS-07", "P0", "Uji akses website dan admin setelah restart/cold start Vercel.", "Aplikasi kembali aktif, terhubung ke Supabase, dan tidak bergantung pada file lokal persisten."),
+            ("OPS-08", "P1", "Ukur first load dingin dan warm load pada halaman publik serta admin.", "Tidak ada timeout; hasil dicatat sebagai baseline dan dibandingkan dengan target tim."),
+            ("OPS-09", "P0", "Jalankan backup Supabase dan simulasi restore pada lingkungan uji.", "Data konten serta akun dapat dipulihkan dan diverifikasi."),
+            ("OPS-10", "P1", "Periksa log Vercel saat operasi normal dan setelah error terkontrol.", "Log membantu diagnosis tanpa membocorkan password, APP_KEY, atau DATABASE_URL."),
+        ]),
+    ]
+
+    for heading, cases in sections:
+        add_qa_section(doc, heading, cases)
+
+    doc.add_heading("Checklist keputusan rilis", level=1)
+    for item in [
+        "Semua kasus P0 berstatus Lulus.",
+        "Kasus P1 yang belum lulus mempunyai tiket, PIC, target waktu, dan persetujuan risiko.",
+        "Konten Indonesia dan English telah disetujui pemilik konten.",
+        "Tampilan desktop, tablet, dan ponsel telah diperiksa pada domain deployment yang sama.",
+        "Backup database terbaru tersedia dan prosedur pemulihan telah diuji.",
+        "APP_DEBUG nonaktif, HTTPS aktif, dan tidak ada secret di GitHub atau dokumen QA.",
+        "Smoke test beranda, pencarian, detail layanan, kontak, login admin, CRUD, serta publish telah lulus setelah deployment terakhir.",
+    ]:
+        bullet(doc, item)
+
+    doc.add_heading("Format pencatatan defect", level=1)
+    table(doc, ["Field", "Isi"], [
+        ["Judul", "Ringkasan masalah dan halaman"],
+        ["ID kasus", "Contoh SRV-06"],
+        ["Environment", "Domain, commit/deployment, database"],
+        ["Perangkat", "Model, OS, browser, ukuran viewport"],
+        ["Langkah", "Urutan tindakan yang dapat direproduksi"],
+        ["Aktual dan ekspektasi", "Apa yang terjadi dan hasil yang seharusnya"],
+        ["Bukti", "Screenshot, video singkat, serta waktu kejadian"],
+        ["Severity dan PIC", "Blocker, Major, Minor serta penanggung jawab"],
+    ], [1.6, 5.3])
+
+    doc.save(DOCS / "qa-feature-checklist.docx")
+
+
 if __name__ == "__main__":
     build_admin_guide()
     build_inventory()
+    build_qa_feature_checklist()

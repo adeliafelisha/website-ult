@@ -98,10 +98,14 @@ class SiteController extends Controller
             $q->where(fn ($x) => $x->where('category', $r->category)->orWhere('category_en', $r->category));
         }
 
+        $faqCategories = Faq::published()->orderBy('sort_order')->get(['category', 'category_en'])
+            ->groupBy(fn (Faq $faq) => $faq->category)
+            ->map(fn ($faqs, $name) => ['name' => $name, 'count' => $faqs->count()])
+            ->values();
+
         return view('faqs', [
             'faqs' => $q->orderBy('sort_order')->paginate(15)->withQueryString(),
-            'faqCategories' => Faq::published()->get(['category', 'category_en'])
-                ->map(fn (Faq $faq) => $faq->category)->filter()->unique()->sort()->values(),
+            'faqCategories' => $faqCategories,
         ]);
     }
 

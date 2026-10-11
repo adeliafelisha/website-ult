@@ -8,7 +8,7 @@ use DOMNode;
 
 class SafeHtml
 {
-    private const ALLOWED_TAGS = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 's', 'blockquote', 'ul', 'ol', 'li', 'h2', 'h3', 'h4', 'a'];
+    private const ALLOWED_TAGS = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 's', 'blockquote', 'ul', 'ol', 'li', 'h2', 'h3', 'h4', 'a', 'figure', 'figcaption', 'img'];
 
     public static function clean(?string $html): ?string
     {
@@ -42,6 +42,7 @@ class SafeHtml
                 continue;
             }
             if (! in_array(strtolower($node->tagName), self::ALLOWED_TAGS, true)) {
+                self::sanitizeChildren($node);
                 while ($node->firstChild) {
                     $parent->insertBefore($node->firstChild, $node);
                 }
@@ -50,7 +51,12 @@ class SafeHtml
                 continue;
             }
             foreach (iterator_to_array($node->attributes) as $attribute) {
-                if ($node->tagName !== 'a' || ! in_array($attribute->name, ['href', 'title'], true)) {
+                $allowedAttributes = match ($node->tagName) {
+                    'a' => ['href', 'title'],
+                    'img' => ['src', 'alt', 'loading'],
+                    default => [],
+                };
+                if (! in_array($attribute->name, $allowedAttributes, true)) {
                     $node->removeAttribute($attribute->name);
                 }
             }
@@ -60,6 +66,15 @@ class SafeHtml
                     $node->removeAttribute('href');
                 }
                 $node->setAttribute('rel', 'noopener noreferrer');
+            }
+            if ($node->tagName === 'img') {
+                $src = trim($node->getAttribute('src'));
+                if (! preg_match('#^/images/service-guides/[a-z0-9/_-]+\.(?:png|jpe?g|webp)$#i', $src)) {
+                    $parent->removeChild($node);
+
+                    continue;
+                }
+                $node->setAttribute('loading', 'lazy');
             }
             self::sanitizeChildren($node);
         }

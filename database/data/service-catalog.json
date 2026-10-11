@@ -1,0 +1,670 @@
+[
+  {
+    "category": {
+      "name": "Calon Mahasiswa",
+      "slug": "calon-mahasiswa",
+      "description": "Informasi layanan untuk calon mahasiswa.",
+      "sort_order": 0,
+      "is_featured": true
+    },
+    "services": [
+      {
+        "category_slug": "calon-mahasiswa",
+        "group": "Layanan Informasi Penerimaan Mahasiswa Baru",
+        "title": "Program Sarjana",
+        "slug": "calon-mahasiswa-program-sarjana",
+        "summary": "Informasi dan panduan Program Sarjana untuk calon mahasiswa.",
+        "audience": "Calon mahasiswa",
+        "procedure": "<p>Akses halaman <a href=\"https://smup.unpad.ac.id\">smup.unpad.ac.id</a></p>\n<p>Klik “Menu” pada kanan atas, lalu pilih section Sarjana</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-program-sarjana-01.png\" alt=\"Petunjuk calon mahasiswa program sarjana langkah 1\" loading=\"lazy\"></figure>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-program-sarjana-02.png\" alt=\"Petunjuk calon mahasiswa program sarjana langkah 2\" loading=\"lazy\"></figure>\n<p>Penerimaan Mahasiswa Baru Jenjang Sarjana, terdiri dari 3 jalur utama, yaitu</p>\n<p>SNBP, dapat diakses pada laman <a href=\"https://smup.unpad.ac.id/snbp/\">https://smup.unpad.ac.id/snbp/</a></p>\n<p>SNBT, dapat diakses pada laman <a href=\"https://smup.unpad.ac.id/snbt/\">https://smup.unpad.ac.id/snbt/</a></p>\n<p>Seleksi Mandiri Prestasi Akademik-Skema Ujian SMUP <a href=\"https://smup.unpad.ac.id/seleksi-mandiri-ujian-smup/\">https://smup.unpad.ac.id/seleksi-mandiri-ujian-smup/</a></p>\n<p>Seleksi Mandiri Prestasi Akademik-Skema UTBK dan Rapor <a href=\"https://smup.unpad.ac.id/ujian-utbk-rapor/\">https://smup.unpad.ac.id/ujian-utbk-rapor/</a></p>\n<p>Pendaftaran Calon Mahasiswa Baru dapat dilakukan melalui <a href=\"https://admission.unpad.ac.id\">admission.unpad.ac.id</a></p>",
+        "delivery_type": "online",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [
+          {
+            "label": "Buka smup.unpad.ac.id",
+            "label_en": "Buka smup.unpad.ac.id",
+            "channel": "website",
+            "url": "https://smup.unpad.ac.id"
+          },
+          {
+            "label": "Buka smup.unpad.ac.id",
+            "label_en": "Buka smup.unpad.ac.id",
+            "channel": "website",
+            "url": "https://smup.unpad.ac.id/snbp/"
+          },
+          {
+            "label": "Buka smup.unpad.ac.id",
+            "label_en": "Buka smup.unpad.ac.id",
+            "channel": "website",
+            "url": "https://smup.unpad.ac.id/snbt/"
+          }
+        ],
+        "keywords": [
+          "calon",
+          "mahasiswa",
+          "layanan",
+          "informasi",
+          "penerimaan",
+          "baru",
+          "program",
+          "sarjana"
+        ],
+        "image_count": 2,
+        "is_featured": false,
+        "is_published": true
+      },
+      {
+        "category_slug": "calon-mahasiswa",
+        "group": "Layanan Informasi Penerimaan Mahasiswa Baru",
+        "title": "Program Pascasarjana",
+        "slug": "calon-mahasiswa-program-pascasarjana",
+        "summary": "Informasi dan panduan Program Pascasarjana untuk calon mahasiswa.",
+        "audience": "Calon mahasiswa",
+        "procedure": "<p>Akses halaman <a href=\"https://smup.unpad.ac.id\">smup.unpad.ac.id</a></p>\n<p>Klik “Menu” pada kanan atas, lalu pilih section “Pascasarjana”</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-program-pascasarjana-01.png\" alt=\"Petunjuk calon mahasiswa program pascasarjana langkah 1\" loading=\"lazy\"></figure>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-program-pascasarjana-02.png\" alt=\"Petunjuk calon mahasiswa program pascasarjana langkah 2\" loading=\"lazy\"></figure>\n<p>Penerimaan Mahasiswa Baru Jenjang Pascasarjana, terdiri dari beberapa skema, seperti</p>\n<p>Magister</p>\n<p>Doktor</p>\n<p>Profesi</p>\n<p>Spesialis dan Subspesialis</p>\n<p>dsb</p>\n<p>Pendaftaran Calon Mahasiswa baru dapat dilakukan melalui laman <a href=\"https://admission.unpad.ac.id\">admission.unpad.ac.id</a></p>",
+        "delivery_type": "online",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [
+          {
+            "label": "Buka smup.unpad.ac.id",
+            "label_en": "Buka smup.unpad.ac.id",
+            "channel": "website",
+            "url": "https://smup.unpad.ac.id"
+          },
+          {
+            "label": "Buka admission.unpad.ac.id",
+            "label_en": "Buka admission.unpad.ac.id",
+            "channel": "website",
+            "url": "https://admission.unpad.ac.id"
+          }
+        ],
+        "keywords": [
+          "calon",
+          "mahasiswa",
+          "layanan",
+          "informasi",
+          "penerimaan",
+          "baru",
+          "program",
+          "pascasarjana"
+        ],
+        "image_count": 2,
+        "is_featured": false,
+        "is_published": true
+      },
+      {
+        "category_slug": "calon-mahasiswa",
+        "group": "Registrasi Mahasiswa Baru",
+        "title": "Tatacara Registrasi Mahasiswa Baru",
+        "slug": "calon-mahasiswa-tatacara-registrasi-mahasiswa-baru",
+        "summary": "Informasi dan panduan Tatacara Registrasi Mahasiswa Baru untuk calon mahasiswa.",
+        "audience": "Calon mahasiswa",
+        "procedure": "<p>Akses halaman <a href=\"https://students.unpad.ac.id/peserta\">https://students.unpad.ac.id/peserta</a></p>\n<p>Login pada akun calon mahasiswa dengan memasukkan No. Peserta SNBP/SNBT-UTBK/SMUP dan tanggal lahir untuk password dengan format DD/MM/YYYY.</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-tatacara-registrasi-mahasiswa-baru-01.png\" alt=\"Petunjuk calon mahasiswa tatacara registrasi mahasiswa baru langkah 1\" loading=\"lazy\"></figure>\n<p>Nomor tagihan dapat diakses pada section “Informasi Pembayaran”.</p>\n<p>Pembayaran dapat dilakukan melalui ATM, m-banking, atau teller bank sesuai bank yang telah dipilih.</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-tatacara-registrasi-mahasiswa-baru-02.jpg\" alt=\"Petunjuk calon mahasiswa tatacara registrasi mahasiswa baru langkah 2\" loading=\"lazy\"></figure>\n<p>Jika berhasil dapat lanjut ke section “Upload Dokumen Registrasi”.</p>\n<p>Lengkapi seluruh data dan tunggu secara berkala hingga statusnya “Disetujui”. Jika ada berkas yang perlu diperbaiki, silakan unggah kembali berkas yang sesuai.</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-tatacara-registrasi-mahasiswa-baru-03.jpg\" alt=\"Petunjuk calon mahasiswa tatacara registrasi mahasiswa baru langkah 3\" loading=\"lazy\"></figure>\n<p>Bukti registrasi dapat diakses pada section “Bukti Registrasi”.</p>",
+        "delivery_type": "online",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [
+          {
+            "label": "Buka students.unpad.ac.id",
+            "label_en": "Buka students.unpad.ac.id",
+            "channel": "website",
+            "url": "https://students.unpad.ac.id/peserta"
+          }
+        ],
+        "keywords": [
+          "calon",
+          "mahasiswa",
+          "registrasi",
+          "baru",
+          "tatacara"
+        ],
+        "image_count": 3,
+        "is_featured": false,
+        "is_published": true
+      },
+      {
+        "category_slug": "calon-mahasiswa",
+        "group": "Registrasi Mahasiswa Baru",
+        "title": "Verifikasi Akun PAuS",
+        "slug": "calon-mahasiswa-verifikasi-akun-paus",
+        "summary": "Informasi dan panduan Verifikasi Akun PAuS untuk calon mahasiswa.",
+        "audience": "Calon mahasiswa",
+        "procedure": "<p>Halaman Akun PAuS ID, setelah proses pemeriksaan otorisasi</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-01.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 1\" loading=\"lazy\"></figure>\n<p>Akun PAuS ID harus di validasi sesuai batas waktu yang telah ditetapkan, yaitu maksimal 7 hari setelah pendaftaran awal.</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-02.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 2\" loading=\"lazy\"></figure>\n<p>Tekan menu Validasi untuk memulai proses verifikasi Nomor Handphone, Alamat Email, Dokumen Identitas Diri dan Dokumen Civitas Akademika.</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-03.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 3\" loading=\"lazy\"></figure>\n<p>Verifikasi Nomor Handphone</p>\n<p>Silahkan tekan tombol “Nomor Handphone” pada menu “Validasi” untuk memverifikasi nomor handphone.</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-04.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 4\" loading=\"lazy\"></figure>\n<p>Silahkan isi nomor handphone dengan menekan tombol “Isi Nomor Handphone”</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-05.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 5\" loading=\"lazy\"></figure>\n<p>Setelah mengisi nomor handphone silahkan menekan tombol “Kirim Kode Konfirmasi” untuk melakukan konfirmasi nomor handphone</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-06.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 6\" loading=\"lazy\"></figure>\n<p>Setelah menekan tombol “Kirim Kode Konfirmasi”, system akan secara otomatis mengirimkan sebuah SMS ke nomor handphone yang sudah di daftarkan yang berisi kode konfirmasi</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-07.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 7\" loading=\"lazy\"></figure>\n<p>Setelah menekan tombol “Kirim Kode Konfirmasi”, system akan secara otomatis mengirimkan sebuah SMS ke nomor handphone yang sudah di daftarkan yang berisi kode konfirmasi</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-08.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 8\" loading=\"lazy\"></figure>\n<p>Konfirmasi kode yang telah dikirimkan melalui SMS Silahkan akses halaman <a href=\"https://pintu.unpad.ac.id/confirm\">https://pintu.unpad.ac.id/confirm</a></p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-09.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 9\" loading=\"lazy\"></figure>\n<p>5. Verifikasi alamat email</p>\n<p>Silahkan pilih menu Validasi</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-10.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 10\" loading=\"lazy\"></figure>\n<p>Tekan Tombol Menu Alamat Email</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-11.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 11\" loading=\"lazy\"></figure>\n<p>Tekan Tombol Isi Alamat Email untuk memulai proses validasi alamat email</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-12.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 12\" loading=\"lazy\"></figure>\n<p>Masukkan alamat email yang aktif dan valid</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-13.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 13\" loading=\"lazy\"></figure>\n<p>Setelah memasukkan alamat email silahkan menekan tombol Kirim Kode Konfirmasi</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-14.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 14\" loading=\"lazy\"></figure>\n<p>Setelah menekan tombol “Kirim Kode Konfirmasi”, system akan secara otomatis mengirimkan kode konfirmasi melalu alamat email sudah di daftarkan.</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-15.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 15\" loading=\"lazy\"></figure>\n<p>Konfirmasi kode yang telah dikirimkan melalui Email Silahkan akses halaman <a href=\"https://pintu.unpad.ac.id/confirm\">https://pintu.unpad.ac.id/confirm</a> Masukkan alamat email, kode konfirmasi dan kode captcha</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-16.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 16\" loading=\"lazy\"></figure>\n<p>6. Validasi Dokumen Identitas Diri</p>\n<p>Pilih menu “Dokumen Identitas Diri” untuk mengunggah KTP atau Passpor, jika belum mempunyai KTP bisa diganti dengan surat keterangan domisili dari kelurahan/kecamatan yang telah dibubuhi foto berwarna dan cap basah</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-17.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 17\" loading=\"lazy\"></figure>\n<p>Tekan Tombol Unggah Dokumen Identitas Diri</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-18.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 18\" loading=\"lazy\"></figure>\n<p>7. Validasi Dokumen Civitas Akademika</p>\n<p>Pilih menu “Dokumen Civitas Akademika” untuk mengunggah KTM (Kartu Tanda Mahasiswa)</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-19.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 19\" loading=\"lazy\"></figure>\n<p>Tekan Tombol Unggah Dokumen Identitas Diri</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-20.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 20\" loading=\"lazy\"></figure>\n<p>8. Proses validasi akun PAuS ID telah selesai, akun beserta dokumen yang sudah diunggah akan diverifikasi oleh Operator Verifikasi PAuS ID sesuai waktu yang sudah ditetapkan, yaitu selama 7 hari setelah proses validasi, jika sampai batas waktu yang sudah ditetapkan maka akun akan dihapus.</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-21.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 21\" loading=\"lazy\"></figure>\n<p>9. Jika akun PAuS ID sudah diverifikasi, akan ada notifikasi yang dikirimkan ke laman akun PAuS ID masing masing pengguna dan akun sudah dapat digunakan untuk mendapatkan layanan yang telah disediakan.</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-22.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 22\" loading=\"lazy\"></figure>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-23.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 23\" loading=\"lazy\"></figure>\n<p>10. Aktifkan Fitur PINTAS pada Dashboard PauS agar PAuS Name yang telah dimiliki dapat digunakan sebagai akses internet dilingkungan Kampus Universitas Padjadjaran</p>\n<p>11. Aktifkan Fitur Email pada Dashboard PAuS untuk dapat memiliki Email berdomain Unpad sebagai mahasiswa</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-verifikasi-akun-paus-24.jpg\" alt=\"Petunjuk calon mahasiswa verifikasi akun paus langkah 24\" loading=\"lazy\"></figure>",
+        "delivery_type": "online",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [
+          {
+            "label": "Buka pintu.unpad.ac.id",
+            "label_en": "Buka pintu.unpad.ac.id",
+            "channel": "website",
+            "url": "https://pintu.unpad.ac.id/confirm"
+          }
+        ],
+        "keywords": [
+          "calon",
+          "mahasiswa",
+          "registrasi",
+          "baru",
+          "verifikasi",
+          "akun",
+          "paus"
+        ],
+        "image_count": 24,
+        "is_featured": false,
+        "is_published": true
+      },
+      {
+        "category_slug": "calon-mahasiswa",
+        "group": "Registrasi Mahasiswa Baru",
+        "title": "Pembayaran UKT",
+        "slug": "calon-mahasiswa-pembayaran-ukt",
+        "summary": "Informasi dan panduan Pembayaran UKT untuk calon mahasiswa.",
+        "audience": "Calon mahasiswa",
+        "procedure": "<p>Rincian layanan belum tersedia pada dokumen sumber.</p>",
+        "delivery_type": "hybrid",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [],
+        "keywords": [
+          "calon",
+          "mahasiswa",
+          "registrasi",
+          "baru",
+          "pembayaran",
+          "ukt"
+        ],
+        "image_count": 0,
+        "is_featured": false,
+        "is_published": true
+      },
+      {
+        "category_slug": "calon-mahasiswa",
+        "group": "Registrasi Mahasiswa Baru",
+        "title": "Penerbitan NPM & KTM",
+        "slug": "calon-mahasiswa-penerbitan-npm-dan-ktm",
+        "summary": "Informasi dan panduan Penerbitan NPM & KTM untuk calon mahasiswa.",
+        "audience": "Calon mahasiswa",
+        "procedure": "<p>Akses halaman <a href=\"https://students.unpad.ac.id/peserta\">https://students.unpad.ac.id/peserta</a></p>\n<p>Login pada akun calon mahasiswa dengan memasukkan No. Peserta SNBP/SNBT-UTBK/SMUP dan tanggal lahir untuk password dengan format DD/MM/YYYY.</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-penerbitan-npm-dan-ktm-01.png\" alt=\"Petunjuk calon mahasiswa penerbitan npm dan ktm langkah 1\" loading=\"lazy\"></figure>\n<p>Nomor Pokok Mahasiswa (NPM) dan Kartu Tanda Mahasiswa (KTM) dapat diakses pada section “Bukti Registrasi”. NPM dan KTM dapat diakses jika sudah melakukan registrasi administratif dan dinyatakan telah memenuhi persyaratan sebagai mahasiswa baru Universitas Padjadjaran.</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-penerbitan-npm-dan-ktm-02.jpg\" alt=\"Petunjuk calon mahasiswa penerbitan npm dan ktm langkah 2\" loading=\"lazy\"></figure>\n<p>Klik “Download Bukti Registrasi Administratif” untuk mengakses NPM.</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-penerbitan-npm-dan-ktm-03.jpg\" alt=\"Petunjuk calon mahasiswa penerbitan npm dan ktm langkah 3\" loading=\"lazy\"></figure>\n<p>Klik “Download Student Card Digital” untuk mengakses KTM digital.</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-penerbitan-npm-dan-ktm-04.jpg\" alt=\"Petunjuk calon mahasiswa penerbitan npm dan ktm langkah 4\" loading=\"lazy\"></figure>",
+        "delivery_type": "online",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [
+          {
+            "label": "Buka students.unpad.ac.id",
+            "label_en": "Buka students.unpad.ac.id",
+            "channel": "website",
+            "url": "https://students.unpad.ac.id/peserta"
+          }
+        ],
+        "keywords": [
+          "calon",
+          "mahasiswa",
+          "registrasi",
+          "baru",
+          "penerbitan",
+          "npm",
+          "&",
+          "ktm"
+        ],
+        "image_count": 4,
+        "is_featured": false,
+        "is_published": true
+      },
+      {
+        "category_slug": "calon-mahasiswa",
+        "group": "Kebutuhan Administrasi",
+        "title": "Pengajuan Letter of Acceptance (LoA)",
+        "slug": "calon-mahasiswa-pengajuan-letter-of-acceptance-loa",
+        "summary": "Informasi dan panduan Pengajuan Letter of Acceptance (LoA) untuk calon mahasiswa.",
+        "audience": "Calon mahasiswa",
+        "procedure": "<p>Bagi Mahasiswa S1</p>\n<p>Kirim email ke <a href=\"mailto:dit.akademik@unpad.ac.id\">dit.akademik@unpad.ac.id</a> dengan melampirkan nama lengkap, nomor peserta, dan pengajuan Letter of Acceptance (LoA).</p>\n<p>Pengajuan akan diproses secara berkala dan ditindaklanjuti dengan surat ajuan yang dikirimkan melalui email yang dicantumkan.</p>\n<p>Bagi Mahasiswa S2/S3</p>\n<p>Akses link <a href=\"https://Students.unpad.ac.id/peserta\">Students.unpad.ac.id/peserta</a></p>\n<p>Input nomor peserta dan password</p>\n<figure><img src=\"/images/service-guides/calon-mahasiswa/calon-mahasiswa-pengajuan-letter-of-acceptance-loa-01.jpg\" alt=\"Petunjuk calon mahasiswa pengajuan letter of acceptance loa langkah 1\" loading=\"lazy\"></figure>\n<p>Silahkan untuk mengakses tab “download”</p>\n<p>Letter of Acceptance (LoA) bisa diakses dan diunduh pada bagian “download”</p>",
+        "delivery_type": "online",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [
+          {
+            "label": "Kirim Email",
+            "label_en": "Kirim Email",
+            "channel": "email",
+            "url": "mailto:dit.akademik@unpad.ac.id"
+          },
+          {
+            "label": "Buka Students.unpad.ac.id",
+            "label_en": "Buka Students.unpad.ac.id",
+            "channel": "website",
+            "url": "https://Students.unpad.ac.id/peserta"
+          }
+        ],
+        "keywords": [
+          "calon",
+          "mahasiswa",
+          "kebutuhan",
+          "administrasi",
+          "pengajuan",
+          "letter",
+          "of",
+          "acceptance",
+          "(loa)"
+        ],
+        "image_count": 1,
+        "is_featured": false,
+        "is_published": true
+      },
+      {
+        "category_slug": "calon-mahasiswa",
+        "group": "Kebutuhan Administrasi",
+        "title": "Pengajuan Surat Defer",
+        "slug": "calon-mahasiswa-pengajuan-surat-defer",
+        "summary": "Informasi dan panduan Pengajuan Surat Defer untuk calon mahasiswa.",
+        "audience": "Calon mahasiswa",
+        "procedure": "<p>Kirim email ke <a href=\"mailto:dit.akademik@unpad.ac.id\">dit.akademik@unpad.ac.id</a> dengan melampirkan nama lengkap, nomor peserta, serta pengajuan surat defer.</p>\n<p>Pengajuan akan diproses secara berkala dan ditindaklanjuti dengan surat ajuan yang dikirimkan melalui email yang dicantumkan.</p>",
+        "delivery_type": "online",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [
+          {
+            "label": "Kirim Email",
+            "label_en": "Kirim Email",
+            "channel": "email",
+            "url": "mailto:dit.akademik@unpad.ac.id"
+          }
+        ],
+        "keywords": [
+          "calon",
+          "mahasiswa",
+          "kebutuhan",
+          "administrasi",
+          "pengajuan",
+          "surat",
+          "defer"
+        ],
+        "image_count": 0,
+        "is_featured": false,
+        "is_published": true
+      }
+    ]
+  },
+  {
+    "category": {
+      "name": "Mahasiswa",
+      "slug": "mahasiswa",
+      "description": "Informasi layanan untuk mahasiswa.",
+      "sort_order": 1,
+      "is_featured": true
+    },
+    "services": [
+      {
+        "category_slug": "mahasiswa",
+        "group": "Herregistrasi",
+        "title": "Pembayaran UKT",
+        "slug": "mahasiswa-pembayaran-ukt",
+        "summary": "Informasi dan panduan Pembayaran UKT untuk mahasiswa.",
+        "audience": "Mahasiswa",
+        "procedure": "<p>Akses laman <a href=\"https://students.unpad.ac.id/pacis\">https://students.unpad.ac.id/pacis</a></p>\n<p>Login dengan menginput PAUS Name dan password serta memasukkan captcha.</p>\n<figure><img src=\"/images/service-guides/mahasiswa/mahasiswa-pembayaran-ukt-01.jpg\" alt=\"Petunjuk mahasiswa pembayaran ukt langkah 1\" loading=\"lazy\"></figure>\n<p>Klik “Informasi Tagihan” pada section Administrasi.</p>\n<figure><img src=\"/images/service-guides/mahasiswa/mahasiswa-pembayaran-ukt-02.jpg\" alt=\"Petunjuk mahasiswa pembayaran ukt langkah 2\" loading=\"lazy\"></figure>\n<p>Lakukan pembayaran UKT dengan metode yang telah dipilih. Nomor tagihan disesuaikan dengan semester terkait.</p>\n<figure><img src=\"/images/service-guides/mahasiswa/mahasiswa-pembayaran-ukt-03.jpg\" alt=\"Petunjuk mahasiswa pembayaran ukt langkah 3\" loading=\"lazy\"></figure>\n<p>Pembayaran UKT dapat dilakukan hingga tenggat waktu yang telah ditentukan.</p>\n<p>Jika sudah selesai, status pembayaran akan berubah menjadi “Sudah Bayar”.</p>\n<figure><img src=\"/images/service-guides/mahasiswa/mahasiswa-pembayaran-ukt-04.jpg\" alt=\"Petunjuk mahasiswa pembayaran ukt langkah 4\" loading=\"lazy\"></figure>",
+        "delivery_type": "online",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [
+          {
+            "label": "Buka students.unpad.ac.id",
+            "label_en": "Buka students.unpad.ac.id",
+            "channel": "website",
+            "url": "https://students.unpad.ac.id/pacis"
+          }
+        ],
+        "keywords": [
+          "mahasiswa",
+          "herregistrasi",
+          "pembayaran",
+          "ukt"
+        ],
+        "image_count": 4,
+        "is_featured": false,
+        "is_published": true
+      },
+      {
+        "category_slug": "mahasiswa",
+        "group": "Herregistrasi",
+        "title": "Early Warning",
+        "slug": "mahasiswa-early-warning",
+        "summary": "Informasi dan panduan Early Warning untuk mahasiswa.",
+        "audience": "Mahasiswa",
+        "procedure": "<p>Early warning akan muncul apabila :</p>\n<p>S1 : IPK dan SKS Lulus tidak terpenuhi</p>\n<p>S2/S3 : belum melakukan Sidang Usulan Riset (SUR)</p>\n<p>Jika mahasiswa tidak dapat membuka PACIS, mahasiswa melakukan konsultasi kepada Kepala Program Studi terkait kendala yang dialami.</p>\n<p>Mahasiswa mengajukan laporan kepada sekretaris prodi untuk membuka akses ke PACIS.</p>\n<p>Prodi akan memproses kepada fakultas untuk membuat surat ajuan ke universitas.</p>",
+        "delivery_type": "hybrid",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [],
+        "keywords": [
+          "mahasiswa",
+          "herregistrasi",
+          "early",
+          "warning"
+        ],
+        "image_count": 0,
+        "is_featured": false,
+        "is_published": true
+      },
+      {
+        "category_slug": "mahasiswa",
+        "group": "Herregistrasi",
+        "title": "Pengajuan Cuti",
+        "slug": "mahasiswa-pengajuan-cuti",
+        "summary": "Informasi dan panduan Pengajuan Cuti untuk mahasiswa.",
+        "audience": "Mahasiswa",
+        "procedure": "<p>Mahasiswa mengajukan cuti kepada sekretaris prodi sesuai dengan alur yang ditentukan prodi.</p>\n<p>Prodi akan mengajukan kepada Manajer Akademik fakultas untuk menindaklanjuti ajuan cuti mahasiswa.</p>\n<p>Fakultas akan membuat surat ajuan cuti untuk diproses ke universitas.</p>\n<p>Perubahan status mahasiswa menjadi cuti akan dilakukan secara berkala.</p>",
+        "delivery_type": "hybrid",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [],
+        "keywords": [
+          "mahasiswa",
+          "herregistrasi",
+          "pengajuan",
+          "cuti"
+        ],
+        "image_count": 0,
+        "is_featured": false,
+        "is_published": true
+      },
+      {
+        "category_slug": "mahasiswa",
+        "group": "Teknologi dan Informasi",
+        "title": "Kendala pada akun email Unpad",
+        "slug": "mahasiswa-kendala-pada-akun-email-unpad",
+        "summary": "Informasi dan panduan Kendala pada akun email Unpad untuk mahasiswa.",
+        "audience": "Mahasiswa",
+        "procedure": "<p>Kirim email ke <a href=\"mailto:support@unpad.ac.id\">support@unpad.ac.id</a> dengan melampirkan nama lengkap, NPM, serta detail dari kendala yang dialami.</p>\n<p>Tunggu secara berkala untuk penindaklanjutan kendala yang dilaporkan.</p>",
+        "delivery_type": "online",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [
+          {
+            "label": "Kirim Email",
+            "label_en": "Kirim Email",
+            "channel": "email",
+            "url": "mailto:support@unpad.ac.id"
+          }
+        ],
+        "keywords": [
+          "mahasiswa",
+          "teknologi",
+          "dan",
+          "informasi",
+          "kendala",
+          "pada",
+          "akun",
+          "email",
+          "unpad"
+        ],
+        "image_count": 0,
+        "is_featured": false,
+        "is_published": true
+      },
+      {
+        "category_slug": "mahasiswa",
+        "group": "Teknologi dan Informasi",
+        "title": "Akun parent Unpad",
+        "slug": "mahasiswa-akun-parent-unpad",
+        "summary": "Informasi dan panduan Akun parent Unpad untuk mahasiswa.",
+        "audience": "Mahasiswa",
+        "procedure": "<p>Akun dapat diakses oleh orang tua/wali mahasiswa Universitas Padjadjaran.</p>\n<p>Akses laman <a href=\"https://parents.unpad.ac.id\">https://parents.unpad.ac.id</a></p>\n<p>Klik “Daftar” untuk membuat akun baru.</p>\n<figure><img src=\"/images/service-guides/mahasiswa/mahasiswa-akun-parent-unpad-01.jpg\" alt=\"Petunjuk mahasiswa akun parent unpad langkah 1\" loading=\"lazy\"></figure>\n<p>Lengkapi data orang tua/wali dengan lengkap.</p>\n<figure><img src=\"/images/service-guides/mahasiswa/mahasiswa-akun-parent-unpad-02.png\" alt=\"Petunjuk mahasiswa akun parent unpad langkah 2\" loading=\"lazy\"></figure>\n<p>Isi data mahasiswa dengan menginput NPM dan tanggal lahir mahasiswa.</p>\n<figure><img src=\"/images/service-guides/mahasiswa/mahasiswa-akun-parent-unpad-03.png\" alt=\"Petunjuk mahasiswa akun parent unpad langkah 3\" loading=\"lazy\"></figure>\n<p>Masukkan kode OTP yang dikirimkan melalui email yang telah didaftarkan.</p>\n<figure><img src=\"/images/service-guides/mahasiswa/mahasiswa-akun-parent-unpad-04.png\" alt=\"Petunjuk mahasiswa akun parent unpad langkah 4\" loading=\"lazy\"></figure>\n<p>Akun berhasil dibuat.</p>\n<p>Login ke dengan email dan password yang telah didaftarkan pada saat membuat akun.</p>\n<figure><img src=\"/images/service-guides/mahasiswa/mahasiswa-akun-parent-unpad-05.png\" alt=\"Petunjuk mahasiswa akun parent unpad langkah 5\" loading=\"lazy\"></figure>",
+        "delivery_type": "online",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [
+          {
+            "label": "Buka parents.unpad.ac.id",
+            "label_en": "Buka parents.unpad.ac.id",
+            "channel": "website",
+            "url": "https://parents.unpad.ac.id"
+          }
+        ],
+        "keywords": [
+          "mahasiswa",
+          "teknologi",
+          "dan",
+          "informasi",
+          "akun",
+          "parent",
+          "unpad"
+        ],
+        "image_count": 5,
+        "is_featured": false,
+        "is_published": true
+      },
+      {
+        "category_slug": "mahasiswa",
+        "group": "Beasiswa",
+        "title": "Informasi beasiswa memulai studi Pascasarjana di Universitas Padjadjaran",
+        "slug": "mahasiswa-informasi-beasiswa-memulai-studi-pascasarjana-di-universitas-padjadjaran",
+        "summary": "Informasi dan panduan Informasi beasiswa memulai studi Pascasarjana di Universitas Padjadjaran untuk mahasiswa.",
+        "audience": "Mahasiswa",
+        "procedure": "<p>Akses laman <a href=\"https://smup.unpad.ac.id\">smup.unpad.ac.id</a></p>\n<p>Informasi beasiswa untuk memulai studi Magister maupun Doktor di Universitas Padjadjaran tersedia pada section “Beasiswa”.</p>\n<figure><img src=\"/images/service-guides/mahasiswa/mahasiswa-informasi-beasiswa-memulai-studi-pascasarjana-di-universitas-padjadjaran-01.jpg\" alt=\"Petunjuk mahasiswa informasi beasiswa memulai studi pascasarjana di universitas padjadjaran langkah 1\" loading=\"lazy\"></figure>\n<p>Klik jenis beasiswa untuk mencari tahu informasi detail dari beasiswa terkait.</p>",
+        "delivery_type": "online",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [
+          {
+            "label": "Buka smup.unpad.ac.id",
+            "label_en": "Buka smup.unpad.ac.id",
+            "channel": "website",
+            "url": "https://smup.unpad.ac.id"
+          }
+        ],
+        "keywords": [
+          "mahasiswa",
+          "beasiswa",
+          "informasi",
+          "memulai",
+          "studi",
+          "pascasarjana",
+          "di",
+          "universitas",
+          "padjadjaran"
+        ],
+        "image_count": 1,
+        "is_featured": false,
+        "is_published": true
+      },
+      {
+        "category_slug": "mahasiswa",
+        "group": "Beasiswa",
+        "title": "Informasi beasiswa",
+        "slug": "mahasiswa-informasi-beasiswa",
+        "summary": "Informasi dan panduan Informasi beasiswa untuk mahasiswa.",
+        "audience": "Mahasiswa",
+        "procedure": "<p>Akses laman <a href=\"https://students.unpad.ac.id/pacis\">https://students.unpad.ac.id/pacis</a></p>\n<p>Klik “Beasiswa” pada section Administrasi.</p>\n<figure><img src=\"/images/service-guides/mahasiswa/mahasiswa-informasi-beasiswa-01.jpg\" alt=\"Petunjuk mahasiswa informasi beasiswa langkah 1\" loading=\"lazy\"></figure>\n<p>Setiap jenis beasiswa akan ditampilkan sesuai linimasa pendaftarannya. Pendaftaran beasiswa yang sedang berlangsung akan ditampilkan pada PACIS.</p>\n<p>Klik “Daftar” untuk melakukan pendaftaran beasiswa yang sesuai.</p>\n<p>Lengkapi administrasi pendaftaran beasiswa.</p>\n<p>Jika dinyatakan lolos seleksi administrasi, mekanisme seleksi selanjutnya disesuaikan dengan jenis beasiswa yang didaftarkan.</p>\n<p>Jika dinyatakan lolos, akan muncul tanda “Disetujui” pada section beasiswa yang didaftarkan.</p>",
+        "delivery_type": "online",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [
+          {
+            "label": "Buka students.unpad.ac.id",
+            "label_en": "Buka students.unpad.ac.id",
+            "channel": "website",
+            "url": "https://students.unpad.ac.id/pacis"
+          }
+        ],
+        "keywords": [
+          "mahasiswa",
+          "beasiswa",
+          "informasi"
+        ],
+        "image_count": 1,
+        "is_featured": false,
+        "is_published": true
+      }
+    ]
+  },
+  {
+    "category": {
+      "name": "Alumni",
+      "slug": "alumni",
+      "description": "Informasi layanan untuk alumni.",
+      "sort_order": 2,
+      "is_featured": true
+    },
+    "services": [
+      {
+        "category_slug": "alumni",
+        "group": "Kebutuhan Lulusan Universitas Padjadjaran",
+        "title": "Pengajuan Status Lulus pada PDDikti",
+        "slug": "alumni-pengajuan-status-lulus-pada-pddikti",
+        "summary": "Informasi dan panduan Pengajuan Status Lulus pada PDDikti untuk alumni.",
+        "audience": "Alumni",
+        "procedure": "<p>Status PDDikti mahasiswa akan di-update setelah mahasiswa menyelesaikan sidang yudisium.</p>\n<p>Fakultas akan melaporkan secara berkala kepada universitas, yang kemudian akan diproses ke PDDikti untuk perubahan status mahasiswa menjadi alumni.</p>\n<p>Kendala pada status PDDikti menghubungi email <a href=\"mailto:layanan.pddikti@unpad.ac.id\">layanan.pddikti@unpad.ac.id</a> dengan format nama, NPM, dan file-file yang dibutuhkan.</p>\n<p>Mengisi dan melengkapi form <a href=\"https://bit.ly/LayananPDDIKTIUnpad\">https://bit.ly/LayananPDDIKTIUnpad</a></p>\n<p>Notes :</p>\n<p>A. Alumi</p>\n<p>File scan ijazah asli</p>\n<p>2. File scan transkrip nilai asli</p>\n<p>3. File scan KTP asli</p>\n<p>4. File scan Akte Lahir asli</p>\n<p>5. File scan Kartu Keluarga asli</p>\n<p>B. Mahasiswa</p>\n<p>1. File scan KTM asli</p>\n<p>2. File scan Transkrip nilai terakhir</p>\n<p>3. File scan KTP asli</p>\n<p>4. File scan Akte Lahir asli</p>\n<p>5. File scan Kartu Keluarga asli</p>",
+        "delivery_type": "online",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [
+          {
+            "label": "Kirim Email",
+            "label_en": "Kirim Email",
+            "channel": "email",
+            "url": "mailto:layanan.pddikti@unpad.ac.id"
+          },
+          {
+            "label": "Buka bit.ly",
+            "label_en": "Buka bit.ly",
+            "channel": "website",
+            "url": "https://bit.ly/LayananPDDIKTIUnpad"
+          }
+        ],
+        "keywords": [
+          "alumni",
+          "kebutuhan",
+          "lulusan",
+          "universitas",
+          "padjadjaran",
+          "pengajuan",
+          "status",
+          "lulus",
+          "pada",
+          "pddikti"
+        ],
+        "image_count": 0,
+        "is_featured": false,
+        "is_published": true
+      },
+      {
+        "category_slug": "alumni",
+        "group": "Kebutuhan Lulusan Universitas Padjadjaran",
+        "title": "Pengambilan Transkrip dan Ijazah",
+        "slug": "alumni-pengambilan-transkrip-dan-ijazah",
+        "summary": "Informasi dan panduan Pengambilan Transkrip dan Ijazah untuk alumni.",
+        "audience": "Alumni",
+        "procedure": "<p>Mahasiswa koordinasikan dengan fakultas untuk pengambilan transkrip dan ijazah.</p>\n<p>Jika transkrip dan ijazah sudah diberikan ke ULT Unpad Jatinangor, ijazah dan transkrip dapat diambil dengan melampirkan surat pengantar dari fakultas.</p>\n<p>Pengambilan transkrip dan ijazah wajib dilakukan oleh orang yang bersangkutan atau orang yang diberikan kuasa.</p>\n<p>Pengambilan transkrip dan ijazah yang diwakilkan, wajib mengirimkan surat kuasa terlebih dahulu ke email <a href=\"mailto:data.ult.dirtakel@unpad.ac.id\">data.ult.dirtakel@unpad.ac.id</a> dan dapat diambil setelah disetujui petugas ULT.</p>\n<p>Format surat kuasa dapat diakses pada laman s.id/FormatSuratKuasaIjazahUnpad</p>\n<figure><img src=\"/images/service-guides/alumni/alumni-pengambilan-transkrip-dan-ijazah-01.png\" alt=\"Petunjuk alumni pengambilan transkrip dan ijazah langkah 1\" loading=\"lazy\"></figure>\n<p>Lampirkan juga fotokopi KTP.</p>",
+        "delivery_type": "online",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [
+          {
+            "label": "Kirim Email",
+            "label_en": "Kirim Email",
+            "channel": "email",
+            "url": "mailto:data.ult.dirtakel@unpad.ac.id"
+          }
+        ],
+        "keywords": [
+          "alumni",
+          "kebutuhan",
+          "lulusan",
+          "universitas",
+          "padjadjaran",
+          "pengambilan",
+          "transkrip",
+          "dan",
+          "ijazah"
+        ],
+        "image_count": 1,
+        "is_featured": false,
+        "is_published": true
+      },
+      {
+        "category_slug": "alumni",
+        "group": "Kebutuhan Lulusan Universitas Padjadjaran",
+        "title": "Legalisir Transkrip dan Ijazah",
+        "slug": "alumni-legalisir-transkrip-dan-ijazah",
+        "summary": "Informasi dan panduan Legalisir Transkrip dan Ijazah untuk alumni.",
+        "audience": "Alumni",
+        "procedure": "<p>Fotokopi transkrip/ijazah yang akan dilegalisir jumlahnya disesuaikan dengan ketentuan masing-masing fakultas.</p>\n<p>Fotokopi transkrip/ijazah dapat dilegalisir di fakultas asal.</p>",
+        "delivery_type": "hybrid",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [],
+        "keywords": [
+          "alumni",
+          "kebutuhan",
+          "lulusan",
+          "universitas",
+          "padjadjaran",
+          "legalisir",
+          "transkrip",
+          "dan",
+          "ijazah"
+        ],
+        "image_count": 0,
+        "is_featured": false,
+        "is_published": true
+      }
+    ]
+  },
+  {
+    "category": {
+      "name": "Layanan Disabilitas",
+      "slug": "layanan-disabilitas",
+      "description": "Informasi layanan untuk mahasiswa dan pengguna layanan disabilitas.",
+      "sort_order": 3,
+      "is_featured": true
+    },
+    "services": [
+      {
+        "category_slug": "layanan-disabilitas",
+        "group": "Layanan Disabilitas",
+        "title": "Informasi Layanan Disabilitas Universitas Padjadjaran",
+        "slug": "layanan-disabilitas-informasi-layanan-disabilitas-universitas-padjadjaran",
+        "summary": "Informasi dan panduan Informasi Layanan Disabilitas Universitas Padjadjaran untuk mahasiswa dan pengguna layanan disabilitas.",
+        "audience": "Mahasiswa dan pengguna layanan disabilitas",
+        "procedure": "<p>Universitas Padjadjaran melayani berbagai jenis layanan disabilitas, yakni :</p>\n<p>Bantuan Teknis</p>\n<p>Layanan bantuan langsung bagi mahasiswa yang membutuhkan akomodasi yang layak untuk menunjang kegiatan perkuliahan</p>\n<p>Unit Layanan Disabilitas (ULD)</p>\n<p>Layanan ini berfungsi sebagai pusat informasi, konsultasi, dan advokasi untuk memastikan mahasiswa disabilitas mendapatkan aksesibilitas dan akomodasi yang layak selama masa studi. Kantor ULD berada di Gedung Kandaga/Perpustakaan Pusat Unpad, Jatinangor</p>\n<p>Assistive Learning Hub (Lantai 4 gedung Graha kandaga)</p>\n<p>Unpad menyediakan fasilitas perangkat dan teknologi adaptif yang dapat digunakan bagi mahasiswa disabilitas dan mahasiswa lainnya</p>\n<p>Juru Bahasa Isyarat</p>\n<p>Layanan akses bahasa isyarat yang dapat diakses melalui Unit Layanan Terpadu (ULT) atau Unit Layanan Disabilitas (ULD) guna menjembatani komunikasi, khususnya bagi pengguna layanan tuli</p>\n<p>Alat Bantu</p>\n<p>Layanan pendukung berupa alat-alat yang mendukung mahasiswa seperti audio books, translation pen, dsb.</p>",
+        "delivery_type": "hybrid",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [],
+        "keywords": [
+          "layanan",
+          "disabilitas",
+          "informasi",
+          "universitas",
+          "padjadjaran"
+        ],
+        "image_count": 0,
+        "is_featured": false,
+        "is_published": true
+      },
+      {
+        "category_slug": "layanan-disabilitas",
+        "group": "Layanan Disabilitas",
+        "title": "Pengajuan Layanan Disabilitas Universitas Padjadjaran",
+        "slug": "layanan-disabilitas-pengajuan-layanan-disabilitas-universitas-padjadjaran",
+        "summary": "Informasi dan panduan Pengajuan Layanan Disabilitas Universitas Padjadjaran untuk mahasiswa dan pengguna layanan disabilitas.",
+        "audience": "Mahasiswa dan pengguna layanan disabilitas",
+        "procedure": "<p>Jenis layanan akan disesuaikan dengan kebutuhan mahasiswa.</p>\n<p>Konsultasi dengan Unit Layanan Disabilitas (ULD) melalui nomor +62 821-2230-1382 dengan melampirkan nama lengkap dan NPM untuk memilih jenis layanan yang sesuai dengan kebutuhan.</p>\n<p>Untuk menunjang kegiatan perkuliahan, kebutuhan layanan dapat dikonsultasikan dengan admin Unit Layanan Disabilitas (ULD) Universitas Padjadjaran.</p>",
+        "delivery_type": "hybrid",
+        "responsible_unit": "Unit terkait — perlu verifikasi",
+        "content_owner": "ULT Unpad",
+        "contact_buttons": [],
+        "keywords": [
+          "layanan",
+          "disabilitas",
+          "pengajuan",
+          "universitas",
+          "padjadjaran"
+        ],
+        "image_count": 0,
+        "is_featured": false,
+        "is_published": true
+      }
+    ]
+  }
+]

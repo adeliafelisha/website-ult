@@ -16,25 +16,27 @@ qs('.search-toggle')?.addEventListener('click', () => {
     if (drawer.classList.contains('open')) setTimeout(() => qs('#global-search')?.focus(), 100);
 });
 
+const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
 const accessibilityDefaults = {
-    font: 2, contrast: false, dark: false, links: false, spacing: false,
+    font: 2, contrast: false, theme: 'system', links: false, spacing: false,
     motion: false, images: false, dyslexia: false, cursor: false,
     lineHeight: 0, align: 0, saturation: 0,
 };
 
 let accessibility = { ...accessibilityDefaults };
 try {
-    accessibility = { ...accessibilityDefaults, ...JSON.parse(localStorage.getItem('ult-accessibility') || '{}') };
+    accessibility = { ...accessibilityDefaults, ...JSON.parse(localStorage.getItem('ult-accessibility-v2') || '{}') };
 } catch (_) { /* Ignore malformed local settings. */ }
 
 const bodyClassMap = {
-    contrast: 'a11y-high-contrast', dark: 'a11y-dark', links: 'a11y-highlight-links',
+    contrast: 'a11y-high-contrast', links: 'a11y-highlight-links',
     spacing: 'a11y-text-spacing', motion: 'reduce-motion', images: 'a11y-hide-images',
     dyslexia: 'a11y-dyslexia', cursor: 'a11y-big-cursor',
 };
 
 function applyAccessibility() {
     const root = document.documentElement;
+    const darkMode = accessibility.theme === 'system' ? systemTheme.matches : accessibility.theme === 'dark';
     root.classList.remove('a11y-font-0', 'a11y-font-1', 'a11y-font-2', 'a11y-font-3', 'a11y-font-4', 'a11y-line-1', 'a11y-line-2', 'a11y-align-1', 'a11y-align-2', 'a11y-saturation-1', 'a11y-saturation-2');
     root.classList.add(`a11y-font-${accessibility.font}`);
     if (accessibility.lineHeight) root.classList.add(`a11y-line-${accessibility.lineHeight}`);
@@ -42,9 +44,10 @@ function applyAccessibility() {
     if (accessibility.saturation) root.classList.add(`a11y-saturation-${accessibility.saturation}`);
 
     Object.entries(bodyClassMap).forEach(([setting, className]) => document.body.classList.toggle(className, Boolean(accessibility[setting])));
-    qs('meta[name="theme-color"]')?.setAttribute('content', accessibility.dark ? '#171217' : '#92278f');
-    document.documentElement.style.colorScheme = accessibility.dark ? 'dark' : 'light';
-    localStorage.setItem('ult-accessibility', JSON.stringify(accessibility));
+    document.body.classList.toggle('a11y-dark', darkMode);
+    qs('meta[name="theme-color"]')?.setAttribute('content', darkMode ? '#171217' : '#92278f');
+    document.documentElement.style.colorScheme = darkMode ? 'dark' : 'light';
+    localStorage.setItem('ult-accessibility-v2', JSON.stringify(accessibility));
 
     qsa('.a11y-option').forEach((button) => {
         const setting = button.dataset.a11y;
@@ -62,6 +65,9 @@ function applyAccessibility() {
         } else if (setting === 'saturation') {
             active = accessibility.saturation > 0;
             level = ['', 'Rendah', 'Tinggi'][accessibility.saturation];
+        } else if (setting === 'dark') {
+            active = darkMode;
+            level = accessibility.theme === 'system' ? 'Auto' : '';
         } else {
             active = Boolean(accessibility[setting]);
         }
@@ -73,7 +79,7 @@ function applyAccessibility() {
 
     const status = qs('.a11y-status');
     if (status) {
-        status.textContent = accessibility.dark
+        status.textContent = darkMode
             ? status.dataset.darkActive
             : status.dataset.lightActive;
     }
@@ -138,15 +144,21 @@ qsa('[data-a11y]').forEach((button) => button.addEventListener('click', () => {
     else if (setting === 'line-height') accessibility.lineHeight = (accessibility.lineHeight + 1) % 3;
     else if (setting === 'align') accessibility.align = (accessibility.align + 1) % 3;
     else if (setting === 'saturation') accessibility.saturation = (accessibility.saturation + 1) % 3;
-    else {
+    else if (setting === 'dark') {
+        const currentlyDark = accessibility.theme === 'system' ? systemTheme.matches : accessibility.theme === 'dark';
+        accessibility.theme = currentlyDark ? 'light' : 'dark';
+        accessibility.contrast = false;
+    } else {
         accessibility[setting] = !accessibility[setting];
-        if (setting === 'dark' && accessibility.dark) accessibility.contrast = false;
-        if (setting === 'contrast' && accessibility.contrast) accessibility.dark = false;
+        if (setting === 'contrast' && accessibility.contrast) accessibility.theme = 'light';
     }
     applyAccessibility();
 }));
 
 applyAccessibility();
+systemTheme.addEventListener?.('change', () => {
+    if (accessibility.theme === 'system') applyAccessibility();
+});
 
 const scrollTopButton = qs('.scroll-top');
 const syncScrollTopButton = () => scrollTopButton?.classList.toggle('visible', window.scrollY > 500);

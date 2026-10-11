@@ -29,7 +29,7 @@ class ExampleTest extends TestCase
         $this->get('/artikel')->assertOk()->assertSee('Artikel');
         $this->get('/faq')->assertOk()->assertSee('Pertanyaan');
         $this->get('/profil')->assertOk()->assertSee('Unit Layanan Terpadu')->assertSee('PASTI');
-        $this->get('/pencarian?q=KTM')->assertOk()->assertSee('Penggantian KTM');
+        $this->get('/pencarian?q=KTM')->assertOk()->assertSee('Penerbitan NPM &amp; KTM', false);
     }
 
     public function test_language_switcher_changes_the_public_interface(): void
@@ -61,9 +61,9 @@ class ExampleTest extends TestCase
             ->assertSee('Kuesioner survei kepuasan masyarakat')
             ->assertDontSee('22.08', false);
         $this->get('/layanan?q=KTM')->assertOk()
-            ->assertSee('Penggantian KTM')
+            ->assertSee('Penerbitan NPM &amp; KTM', false)
             ->assertSee('layanan ditemukan');
-        $this->get('/faq?category=Akademik')->assertOk()
+        $this->get('/faq?category=Mahasiswa+Baru')->assertOk()
             ->assertSee('Jelajahi berdasarkan topik');
     }
 
@@ -93,27 +93,26 @@ class ExampleTest extends TestCase
         $this->get('/language/id');
 
         $this->get('/layanan')->assertOk()
-            ->assertSee('Mahasiswa, Calon Mahasiswa, dan Alumni')
-            ->assertSee('Dosen dan Tenaga Kependidikan')
-            ->assertSee('Teknologi Informasi')
-            ->assertSee('Internasional')
-            ->assertSee('Sarana dan Prasarana')
+            ->assertSee('Calon Mahasiswa')
+            ->assertSee('Mahasiswa')
+            ->assertSee('Alumni')
+            ->assertSee('Layanan Disabilitas')
+            ->assertDontSee('Dosen dan Tenaga Kependidikan')
             ->assertDontSee('name="category"', false)
             ->assertDontSee('name="audience"', false)
             ->assertDontSee('name="delivery"', false);
 
-        $this->get('/layanan/kategori/mahasiswa-calon-mahasiswa-alumni')->assertOk()
-            ->assertSee('Penggantian KTM Hilang atau Rusak')
-            ->assertSee('Informasi UKT dan Registrasi')
-            ->assertSee('Registrasi Mahasiswa Baru')
-            ->assertSee('Bantuan Akun PAuS')
-            ->assertSee('/layanan/penggantian-ktm', false);
+        $this->get('/layanan/kategori/calon-mahasiswa')->assertOk()
+            ->assertSee('Program Sarjana')
+            ->assertSee('Verifikasi Akun PAuS')
+            ->assertSee('Penerbitan NPM &amp; KTM', false)
+            ->assertSee('/layanan/calon-mahasiswa-program-sarjana', false);
 
-        $this->get('/layanan/penggantian-ktm')->assertOk()
+        $this->get('/layanan/calon-mahasiswa-program-sarjana')->assertOk()
             ->assertSee('Kategori dan layanan')
-            ->assertSee('Bantuan Akun PAuS')
+            ->assertSee('Program Pascasarjana')
             ->assertSee('Hubungi Kami')
-            ->assertSee('Hubungi Admin ULT')
+            ->assertSee('/images/service-guides/calon-mahasiswa/', false)
             ->assertSee('service-side', false)
             ->assertDontSee('Langkah selanjutnya')
             ->assertSee('aria-current="page"', false);

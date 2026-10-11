@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
-use App\Models\Faq;
 use App\Models\QuickLink;
 use App\Models\Service;
 use App\Models\ServiceCategory;
@@ -48,12 +47,11 @@ class DatabaseSeeder extends Seeder
         foreach ([['Panduan Cepat Menemukan Layanan Kampus', 'panduan-menemukan-layanan', 'Panduan', 'Mulai dari kebutuhanmu, lalu ikuti satu tindakan utama pada setiap layanan.', '<p>Gunakan pencarian, pilih layanan, baca persyaratan, lalu ikuti tombol tindakan menuju kanal resmi.</p>'], ['Kampus Inklusif: Mengenal Fasilitas Aksesibilitas', 'kampus-inklusif-fasilitas-aksesibilitas', 'Aksesibilitas', 'Kenali dukungan akses dan cara meminta pendampingan sebelum berkunjung.', '<p>Hubungi kanal resmi sebelum kunjungan agar kebutuhan akses dapat disiapkan.</p>'], ['Persiapan Administrasi Mahasiswa Baru', 'persiapan-administrasi-mahasiswa-baru', 'Mahasiswa Baru', 'Daftar ringkas untuk menyiapkan proses registrasi.', '<p>Pastikan data identitas konsisten dan proses dilakukan melalui portal resmi SMUP.</p>']] as $i => $a) {
             Article::updateOrCreate(['slug' => $a[1]], ['title' => $a[0], 'category' => $a[2], 'excerpt' => $a[3], 'content' => $a[4], 'author' => 'Tim ULT Unpad', 'content_owner' => 'ULT Unpad', 'is_featured' => true, 'is_published' => true, 'published_at' => now()->subDays($i * 4), 'keywords' => explode(' ', strtolower($a[0]))]);
         }
-        foreach ([['Bagaimana cara menemukan layanan yang tepat?', 'Gunakan pencarian global atau pilih kategori berdasarkan kebutuhan. Setiap layanan memiliki langkah berikutnya yang jelas.', 'Umum'], ['Apakah website ULT membuat tiket pengaduan?', 'Tidak. Website ULT adalah portal informasi yang mengarahkan Anda ke sistem atau kanal resmi.', 'Umum'], ['Apa yang dilakukan jika tautan eksternal bermasalah?', 'Buka halaman Kontak untuk kanal alternatif resmi, lalu sampaikan nama layanan dan kendalanya.', 'Teknis'], ['Bagaimana meminta pendampingan aksesibilitas?', 'Buka Layanan Disabilitas lalu hubungi ULT sebelum kunjungan.', 'Aksesibilitas']] as $i => $f) {
-            Faq::updateOrCreate(['question' => $f[0]], ['answer' => $f[1], 'category' => $f[2], 'sort_order' => $i, 'is_featured' => true, 'is_published' => true]);
-        }
         foreach ([['Website Unpad', 'https://www.unpad.ac.id', 'Informasi utama Universitas Padjadjaran'], ['SMUP', 'https://smup.unpad.ac.id', 'Seleksi masuk dan registrasi'], ['PAuS', 'https://paus.unpad.ac.id', 'Akses akun dan sistem terintegrasi'], ['PPID Unpad', 'https://ppid.unpad.ac.id', 'Informasi publik']] as $i => $l) {
             QuickLink::updateOrCreate(['name' => $l[0]], ['url' => $l[1], 'description' => $l[2], 'sort_order' => $i, 'is_published' => true]);
         }
         $this->call(ContactSeeder::class);
+        $this->call(ServiceCatalogSeeder::class);
+        $this->call(FaqCatalogSeeder::class);
     }
 }
