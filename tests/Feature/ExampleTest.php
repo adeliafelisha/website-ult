@@ -46,7 +46,8 @@ class ExampleTest extends TestCase
     {
         $this->seed();
 
-        $this->get('/kontak')->assertOk()->assertSee('WhatsApp Admin ULT')->assertSee('Helpdesk Unpad')->assertSee('Instagram ULT Unpad')->assertSee('TikTok ULT Unpad');
+        $this->get('/language/id');
+        $this->get('/kontak')->assertOk()->assertSee('WhatsApp ULT')->assertDontSee('WhatsApp Admin ULT')->assertSee('Helpdesk Unpad')->assertSee('Instagram ULT Unpad')->assertSee('TikTok ULT Unpad');
     }
 
     public function test_new_discovery_interfaces_and_profile_scores_are_available(): void

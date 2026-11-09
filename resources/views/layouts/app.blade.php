@@ -19,25 +19,30 @@
 <a class="skip-link" href="#main">{{ __('ui.skip') }}</a>
 <header class="site-header" id="header"><div class="container nav-wrap">
     <a href="{{ route('home') }}" class="brand" aria-label="ULT Unpad {{ __('ui.home') }}"><img src="{{ asset('images/logo-ult.png') }}" alt="Logo ULT Unpad"><span><b>ULT Unpad</b><small>Unit Layanan Terpadu</small></span></a>
-    <button class="nav-toggle" aria-label="{{ __('ui.menu_open') }}" aria-expanded="false"><x-ui-icon name="menu" /></button>
-    <nav class="nav-menu" aria-label="Navigasi utama">
+    <button class="nav-toggle" aria-label="{{ __('ui.menu_open') }}" aria-expanded="false" aria-controls="main-menu"><x-ui-icon name="menu" /></button>
+    <nav id="main-menu" class="nav-menu" aria-label="Navigasi utama">
         <a class="{{ request()->routeIs('home')?'active':'' }}" href="{{ route('home') }}">{{ __('ui.home') }}</a>
         <a class="{{ request()->routeIs('profile')?'active':'' }}" href="{{ route('profile') }}">{{ __('ui.profile') }}</a>
         <a class="{{ request()->routeIs('services.*')?'active':'' }}" href="{{ route('services.index') }}">{{ __('ui.services') }}</a>
         <a class="{{ request()->routeIs('articles.*')?'active':'' }}" href="{{ route('articles.index') }}">{{ __('ui.articles') }}</a>
         <a class="{{ request()->routeIs('faqs')?'active':'' }}" href="{{ route('faqs') }}">{{ __('ui.faq') }}</a>
         <a class="{{ request()->routeIs('contact')?'active':'' }}" href="{{ route('contact') }}">{{ __('ui.contact') }}</a>
-    </nav>
-    <div class="nav-actions">
-        <button class="icon-btn search-toggle" aria-label="{{ __('ui.search_open') }}"><x-ui-icon name="search" size="20" /></button>
-        <button class="icon-btn a11y-toggle" aria-label="{{ __('ui.accessibility') }}" aria-expanded="false"><x-ui-icon name="accessibility" size="20" /></button>
         <div class="language-switcher" aria-label="{{ __('ui.language') }}">
             <a class="{{ app()->getLocale() === 'id' ? 'active' : '' }}" href="{{ route('language.switch','id') }}" lang="id">ID</a><span>/</span><a class="{{ app()->getLocale() === 'en' ? 'active' : '' }}" href="{{ route('language.switch','en') }}" lang="en">EN</a>
         </div>
+    </nav>
+    <div class="nav-actions">
+        <button class="icon-btn search-toggle" aria-expanded="false" aria-controls="site-search" aria-label="{{ __('ui.search_open') }}"><x-ui-icon name="search" size="20" /></button>
+        <button type="button" class="icon-btn theme-toggle" aria-label="{{ __('ui.dark_mode') }}" aria-pressed="false"
+            data-light-label="{{ __('ui.switch_to_light') }}" data-dark-label="{{ __('ui.switch_to_dark') }}">
+            <x-ui-icon name="moon" size="20" class="theme-moon" />
+            <x-ui-icon name="sun" size="20" class="theme-sun" />
+        </button>
+        <button class="icon-btn a11y-toggle" aria-label="{{ __('ui.accessibility') }}" aria-expanded="false"><x-ui-icon name="accessibility" size="20" /></button>
     </div>
 </div></header>
 
-<div class="search-drawer" aria-hidden="true"><div class="container"><form action="{{ route('search') }}"><label for="global-search">{{ __('ui.search_question') }}</label><div class="search-box"><input id="global-search" name="q" minlength="2" placeholder="{{ __('ui.search_placeholder') }}"><button>{{ __('ui.search') }}</button></div></form></div></div>
+<div id="site-search" class="search-drawer" aria-hidden="true" inert><div class="container"><form action="{{ route('search') }}"><label for="global-search">{{ __('ui.search_question') }}</label><div class="search-box"><input id="global-search" name="q" minlength="2" placeholder="{{ __('ui.search_placeholder') }}"><button>{{ __('ui.search') }}</button></div></form></div></div>
 
 <div class="a11y-backdrop" hidden></div>
 <aside class="a11y-panel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="a11y-title" tabindex="-1">
@@ -65,15 +70,16 @@
 </aside>
 
 <main id="main">@yield('content')</main>
-<footer><div class="container footer-grid">
+<footer class="site-footer"><div class="container footer-grid">
     <div><div class="brand footer-brand"><img src="{{ asset('images/logo-ult.png') }}" alt=""><span><b>ULT Unpad</b><small>Melayani dengan PASTI</small></span></div><p>{{ __('ui.footer_text') }}</p><div class="social-links">
         @foreach($footerContacts->whereIn('type',['whatsapp','instagram','tiktok']) as $social)
-            <a class="external-link" data-track="{{ $social->label }}" href="{{ $social->url }}" target="_blank" rel="noopener" aria-label="{{ $social->label }}"><x-ui-icon :name="$social->type" size="20" /></a>
+            @php($socialLabel = $social->label === 'WhatsApp Admin ULT' ? __('ui.whatsapp_ult') : $social->label)
+            <a class="external-link" data-track="{{ $socialLabel }}" href="{{ $social->url }}" target="_blank" rel="noopener" aria-label="{{ $socialLabel }}"><x-ui-icon :name="$social->type" size="20" /></a>
         @endforeach
     </div></div>
     <div><h3>{{ __('ui.explore_footer') }}</h3><a href="{{ route('profile') }}">{{ __('ui.profile') }}</a><a href="{{ route('services.index') }}">{{ __('ui.service_directory') }}</a><a href="{{ route('articles.index') }}">{{ __('ui.article_info') }}</a><a href="{{ route('faqs') }}">{{ __('ui.questions') }}</a></div>
     <div><h3>{{ __('ui.main_links') }}</h3><a href="https://www.unpad.ac.id" target="_blank" rel="noopener">Website Unpad ↗</a><a href="https://smup.unpad.ac.id" target="_blank" rel="noopener">SMUP ↗</a><a href="{{ route('contact') }}">{{ __('ui.contact_ult') }}</a></div>
-    <div><h3>{{ __('ui.location') }}</h3><p>Gedung Rektorat Unpad<br>Jatinangor, Sumedang</p><small>{{ __('ui.verify_contact') }}</small></div>
-</div><div class="container footer-bottom"><span>© {{ date('Y') }} ULT Universitas Padjadjaran</span><a href="/admin">{{ __('ui.admin_login') }}</a></div></footer>
+    <div><h3>{{ __('ui.location') }}</h3><p>Gedung Rektorat Unpad<br>Jatinangor, Sumedang</p></div>
+</div><div class="container footer-bottom"><span>© {{ date('Y') }} ULT Universitas Padjadjaran</span></div></footer>
 <button class="scroll-top" aria-label="Scroll to top" title="Scroll to top"><x-ui-icon name="arrow-up" size="22" /></button>
 </body></html>

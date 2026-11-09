@@ -5,12 +5,22 @@
     $contactButtons = collect($service->contact_buttons);
     if ($contactButtons->isEmpty()) {
         $contactButtons = collect([[
-            'label' => 'Hubungi Admin ULT',
-            'label_en' => 'Contact ULT Admin',
+            'label' => __('ui.contact_ult'),
             'channel' => 'whatsapp',
             'url' => $defaultContact?->url ?: route('contact'),
         ]]);
     }
 @endphp
-<section class="section"><div class="container service-detail-directory">@include('services._category-sidebar',['activeCategory'=>$service->category,'activeService'=>$service])<div class="detail-content"><article><section><h2>{{ __('ui.who_can_use') }}</h2><p>{{ $service->audience ?: __('ui.default_audience') }}</p></section>@if($service->requirements)<section><h2>{{ __('ui.requirements') }}</h2><div class="prose">{!! nl2br(e($service->requirements)) !!}</div></section>@endif @if($service->documents)<section><h2>{{ __('ui.required_documents') }}</h2><div class="prose">{!! nl2br(e($service->documents)) !!}</div></section>@endif @if($service->procedure)<section><h2>{{ __('ui.procedure') }}</h2><div class="prose">{!! $service->procedure !!}</div></section>@endif</article><aside class="service-side"><div class="info-panel"><h2>{{ __('ui.service_information') }}</h2>@foreach([[__('ui.service_type'),__('ui.'.$service->delivery_type)],['Lokasi / Location',$service->location],[__('ui.service_hours'),$service->service_hours],[__('ui.processing_time'),$service->process_time],[__('ui.fee'),$service->fee?:__('ui.default_fee')],[__('ui.responsible_unit'),$service->responsible_unit]] as [$k,$v])@if($v)<div><span>{{ $k }}</span><b>{{ $v }}</b></div>@endif @endforeach</div><div class="action-card"><h2>{{ __('ui.contact_us') }}</h2><p>{{ __('ui.official_channel_text') }}</p><div class="service-contact-buttons">@foreach($contactButtons as $button)@php($buttonLabel = app()->getLocale() === 'en' ? ($button['label_en'] ?? $button['label'] ?? __('ui.contact_ult')) : ($button['label'] ?? __('ui.contact_ult'))) <a class="btn external-link" data-track="{{ $service->title }} - {{ $buttonLabel }}" href="{{ $button['url'] ?? route('contact') }}" target="_blank" rel="noopener">{{ $buttonLabel }} ↗</a>@endforeach</div></div></aside></div></div></section>
+<section class="section"><div class="container service-detail-directory">@include('services._category-sidebar',['activeCategory'=>$service->category,'activeService'=>$service])<div class="detail-content"><article><section><h2>{{ __('ui.who_can_use') }}</h2><p>{{ $service->audience ?: __('ui.default_audience') }}</p></section>@if($service->requirements)<section><h2>{{ __('ui.requirements') }}</h2><div class="prose">{!! nl2br(e($service->requirements)) !!}</div></section>@endif @if($service->documents)<section><h2>{{ __('ui.required_documents') }}</h2><div class="prose">{!! nl2br(e($service->documents)) !!}</div></section>@endif @if($service->procedure)<section><h2>{{ __('ui.procedure') }}</h2><div class="prose">{!! $service->procedure !!}</div></section>@endif</article><aside class="service-side"><div class="info-panel"><h2>{{ __('ui.service_information') }}</h2>@foreach([[__('ui.service_type'),__('ui.'.$service->delivery_type)],['Lokasi / Location',$service->location],[__('ui.service_hours'),$service->service_hours],[__('ui.processing_time'),$service->process_time],[__('ui.fee'),$service->fee?:__('ui.default_fee')],[__('ui.responsible_unit'),$service->responsible_unit]] as [$k,$v])@if($v)<div><span>{{ $k }}</span><b>{{ $v }}</b></div>@endif @endforeach</div><div class="action-card"><h2>{{ __('ui.contact_us') }}</h2><p>{{ __('ui.official_channel_text') }}</p><div class="service-contact-buttons">
+    @foreach($contactButtons as $button)
+        @php
+            $buttonLabel = (app()->getLocale() === 'en' ? ($button['label_en'] ?? null) : null)
+                ?? $button['label'] ?? __('ui.contact_ult');
+            if (in_array($buttonLabel, ['Hubungi Admin ULT', 'Contact ULT Admin'], true)) {
+                $buttonLabel = __('ui.contact_ult');
+            }
+        @endphp
+        <a class="btn external-link" data-track="{{ $service->title }} - {{ $buttonLabel }}" href="{{ $button['url'] ?? route('contact') }}" target="_blank" rel="noopener">{{ $buttonLabel }} ↗</a>
+    @endforeach
+</div></div></aside></div></div></section>
 @if($related->isNotEmpty())<section class="section soft"><div class="container"><div class="section-head"><h2>{{ __('ui.related_services') }}</h2></div><div class="card-grid">@foreach($related as $item)<x-service-card :service="$item"/>@endforeach</div></div></section>@endif @endsection

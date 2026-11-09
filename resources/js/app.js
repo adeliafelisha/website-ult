@@ -3,20 +3,49 @@ import './bootstrap';
 const qs = (selector) => document.querySelector(selector);
 const qsa = (selector) => document.querySelectorAll(selector);
 
-qs('.nav-toggle')?.addEventListener('click', (event) => {
-    const menu = qs('.nav-menu');
-    menu.classList.toggle('open');
-    event.currentTarget.setAttribute('aria-expanded', menu.classList.contains('open'));
+const navToggle = qs('.nav-toggle');
+const navMenu = qs('.nav-menu');
+const searchToggle = qs('.search-toggle');
+const searchDrawer = qs('.search-drawer');
+
+function setMenu(open) {
+    navMenu.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', open);
+}
+
+function setSearch(open) {
+    searchDrawer.classList.toggle('open', open);
+    searchDrawer.inert = !open;
+    searchDrawer.setAttribute('aria-hidden', !open);
+    searchToggle.setAttribute('aria-expanded', open);
+    if (open) qs('#global-search').focus();
+}
+
+navToggle.addEventListener('click', () => {
+    setSearch(false);
+    setMenu(!navMenu.classList.contains('open'));
 });
 
-qs('.search-toggle')?.addEventListener('click', () => {
-    const drawer = qs('.search-drawer');
-    drawer.classList.toggle('open');
-    drawer.setAttribute('aria-hidden', !drawer.classList.contains('open'));
-    if (drawer.classList.contains('open')) setTimeout(() => qs('#global-search')?.focus(), 100);
+searchToggle.addEventListener('click', () => {
+    setMenu(false);
+    setSearch(searchDrawer.inert);
 });
+
+document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || qs('.a11y-panel.open')) return;
+    if (!searchDrawer.inert) {
+        setSearch(false);
+        searchToggle.focus();
+    } else if (navMenu.classList.contains('open')) {
+        setMenu(false);
+        navToggle.focus();
+    }
+});
+
+window.matchMedia('(max-width: 980px)').addEventListener('change', () => setMenu(false));
 
 const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+const themeToggle = qs('.theme-toggle');
 const accessibilityDefaults = {
     font: 2, contrast: false, theme: 'system', links: false, spacing: false,
     motion: false, images: false, dyslexia: false, cursor: false,
@@ -34,9 +63,21 @@ const bodyClassMap = {
     dyslexia: 'a11y-dyslexia', cursor: 'a11y-big-cursor',
 };
 
+function isDarkMode() {
+    return accessibility.theme === 'system' ? systemTheme.matches : accessibility.theme === 'dark';
+}
+
+function toggleTheme() {
+    accessibility.theme = isDarkMode() ? 'light' : 'dark';
+    accessibility.contrast = false;
+    applyAccessibility();
+}
+
+themeToggle.addEventListener('click', toggleTheme);
+
 function applyAccessibility() {
     const root = document.documentElement;
-    const darkMode = accessibility.theme === 'system' ? systemTheme.matches : accessibility.theme === 'dark';
+    const darkMode = isDarkMode();
     root.classList.remove('a11y-font-0', 'a11y-font-1', 'a11y-font-2', 'a11y-font-3', 'a11y-font-4', 'a11y-line-1', 'a11y-line-2', 'a11y-align-1', 'a11y-align-2', 'a11y-saturation-1', 'a11y-saturation-2');
     root.classList.add(`a11y-font-${accessibility.font}`);
     if (accessibility.lineHeight) root.classList.add(`a11y-line-${accessibility.lineHeight}`);
@@ -45,9 +86,13 @@ function applyAccessibility() {
 
     Object.entries(bodyClassMap).forEach(([setting, className]) => document.body.classList.toggle(className, Boolean(accessibility[setting])));
     document.body.classList.toggle('a11y-dark', darkMode);
+    themeToggle.setAttribute('aria-pressed', String(darkMode));
+    themeToggle.title = darkMode ? themeToggle.dataset.lightLabel : themeToggle.dataset.darkLabel;
     qs('meta[name="theme-color"]')?.setAttribute('content', darkMode ? '#171217' : '#92278f');
     document.documentElement.style.colorScheme = darkMode ? 'dark' : 'light';
-    localStorage.setItem('ult-accessibility-v2', JSON.stringify(accessibility));
+    try {
+        localStorage.setItem('ult-accessibility-v2', JSON.stringify(accessibility));
+    } catch (_) { /* Keep the settings active for this page. */ }
 
     qsa('.a11y-option').forEach((button) => {
         const setting = button.dataset.a11y;
@@ -138,17 +183,17 @@ document.addEventListener('keydown', (event) => {
 
 qsa('[data-a11y]').forEach((button) => button.addEventListener('click', () => {
     const setting = button.dataset.a11y;
+    if (setting === 'dark') {
+        toggleTheme();
+        return;
+    }
     if (setting === 'reset') accessibility = { ...accessibilityDefaults };
     else if (setting === 'font-increase') accessibility.font = Math.min(4, accessibility.font + 1);
     else if (setting === 'font-decrease') accessibility.font = Math.max(0, accessibility.font - 1);
     else if (setting === 'line-height') accessibility.lineHeight = (accessibility.lineHeight + 1) % 3;
     else if (setting === 'align') accessibility.align = (accessibility.align + 1) % 3;
     else if (setting === 'saturation') accessibility.saturation = (accessibility.saturation + 1) % 3;
-    else if (setting === 'dark') {
-        const currentlyDark = accessibility.theme === 'system' ? systemTheme.matches : accessibility.theme === 'dark';
-        accessibility.theme = currentlyDark ? 'light' : 'dark';
-        accessibility.contrast = false;
-    } else {
+    else {
         accessibility[setting] = !accessibility[setting];
         if (setting === 'contrast' && accessibility.contrast) accessibility.theme = 'light';
     }
@@ -226,36 +271,30 @@ qs('[data-satisfaction-year]')?.addEventListener('change', (event) => {
     });
 });
 
-const revealSelectors = [
-    'main .section-head', 'main .page-hero .container', 'main .profile-hero-grid > *',
-    'main .category-card', 'main .service-card', 'main .article-card',
-    'main .split > *', 'main .timeline article', 'main .purpose-grid article',
-    'main .pasti-grid article', 'main .satisfaction-grid article',
-    'main .legal-grid > *', 'main .team-grid > *', 'main .profile-gallery figure',
-    'main .contact-card', 'main .finder-panel', 'main .results-summary',
-    'main .faq-layout > *', 'main .quick-links .link-grid a', 'main .service-category-card',
-    'main .category-hero .container', 'main .category-directory > *',
-    'main .service-detail-directory > *', 'main .detail-grid > *',
-    'main .detail-content > *', 'main .article-detail > *',
-];
+const directory = qs('[data-campus-directory]');
+const directoryFilter = directory?.querySelector('[data-directory-filter]');
+if (directoryFilter) {
+    const input = directoryFilter.querySelector('input');
+    const status = directoryFilter.querySelector('[data-directory-status]');
+    const empty = directory.querySelector('[data-directory-empty]');
+    const categories = [...directory.querySelectorAll('[data-directory-category]')].map((link) => ({
+        link,
+        text: link.querySelector('div').textContent.toLocaleLowerCase(),
+    }));
 
-const revealElements = [...new Set(revealSelectors.flatMap((selector) => [...qsa(selector)]))];
-revealElements.forEach((element, index) => {
-    element.classList.add('scroll-reveal');
-    element.style.setProperty('--reveal-delay', `${Math.min(index % 4, 3) * 70}ms`);
-    if (element.matches('.split > :first-child, .legal-grid > :first-child, .team-grid > :first-child')) element.classList.add('reveal-from-left');
-    if (element.matches('.split > :last-child, .legal-grid > :last-child, .team-grid > :last-child')) element.classList.add('reveal-from-right');
-});
-
-if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add('is-revealed');
-            observer.unobserve(entry.target);
+    function filterCategories() {
+        const words = input.value.trim().toLocaleLowerCase().split(/\s+/);
+        let matches = 0;
+        categories.forEach(({ link, text }) => {
+            const visible = words.every((word) => text.includes(word));
+            link.hidden = !visible;
+            if (visible) matches++;
         });
-    }, { threshold: 0.12, rootMargin: '0px 0px -45px' });
-    revealElements.forEach((element) => revealObserver.observe(element));
-} else {
-    revealElements.forEach((element) => element.classList.add('is-revealed'));
+        empty.hidden = matches !== 0;
+        status.textContent = status.dataset.template.replace(':count', matches);
+    }
+
+    directoryFilter.hidden = false;
+    input.addEventListener('input', filterCategories);
+    filterCategories();
 }

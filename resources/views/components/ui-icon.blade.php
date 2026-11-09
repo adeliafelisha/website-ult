@@ -9,6 +9,7 @@
 @case('minus-text')<path d="M4 18V7h7M4 12h6M15 8h6"/>@break
 @case('contrast')<circle cx="12" cy="12" r="9"/><path d="M12 3v18a9 9 0 0 0 0-18Z" fill="currentColor"/>@break
 @case('moon')<path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"/>@break
+@case('sun')<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M19 5l-1.5 1.5m-11 11L5 19"/>@break
 @case('link')<path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1M14 11a5 5 0 0 0-7.1-.1l-2 2A5 5 0 0 0 12 20l1.1-1.1"/>@break
 @case('spacing')<path d="M4 7h16M4 17h16M8 12h8M5 10l-2 2 2 2M19 10l2 2-2 2"/>@break
 @case('pause')<circle cx="12" cy="12" r="9" stroke-dasharray="2 3"/><path d="M9 9v6M15 9v6"/>@break
